@@ -1,2 +1,2 @@
-# university-press-citation-review-workbench
-A secure, source-preserving desktop workbench for running batches of University Press chapters through Reference &amp; Citation Integrity and Scholarly/Editorial Integrity review.
+The University Press Citation Review Workbench helps editors process folders of DOCX, Markdown, and text chapters through two governed editorial-review skills: Reference & Citation Integrity and Scholarly/Editorial Integrity. It preserves original manuscripts, records provenance and review evidence, and produces an organized output folder containing author-facing Word copies with comments, editorial queries, structured findings, and run receipts.
+The workbench uses GLM 5.3 through LunaRoute for bounded review tasks. It does not silently accept edits, overwrite source manuscripts, determine misconduct, or publish material. Editors retain responsibility for accepting, rejecting, and distributing every proposed change.
