@@ -1,0 +1,24 @@
+{
+  "package_id": "MWM-RCI-PACKAGE",
+  "family": "Reference & Citation Integrity",
+  "folder_name": "reference-citation-integrity",
+  "package_version": "0.1.0",
+  "specification_id": "MWM-RCI-SPEC",
+  "specification_version": "0.1.0-draft",
+  "components": {
+    "specification": "01_SPECIFICATION.md",
+    "01_specification_docx": "01_SPECIFICATION.docx",
+    "rules": ["02_RULES/ruleset.json", "02_RULES/ruleset_addenda.json", "02_RULES/decision_hooks.json", "02_RULES/source_taxonomy.json", "02_RULES/authority_registry.json"],
+    "skill": "SKILL.md",
+    "schemas": "schemas/",
+    "evals": "evals/",
+    "changelog_regression": "CHANGELOG_REGRESSION/"
+  },
+  "subskills": ["RCI-01", "RCI-02", "RCI-03", "RCI-04", "RCI-05", "RCI-06", "RCI-07"],
+  "rule_count": 23,
+  "fixture_total": 51,
+  "evaluation_set_id": "MWM-RCI-EVAL-01",
+  "fixture_counts": {"clean": 6, "single_error": 15, "adversarial": 12, "negative_control": 10, "integration": 8},
+  "open_decision_hooks": ["RCI-DH-001", "RCI-DH-002", "RCI-DH-003", "RCI-DH-004", "RCI-DH-005", "RCI-DH-006", "RCI-DH-007", "RCI-DH-008", "RCI-DH-009"],
+  "release_note": "This is a draft-for-editorial-review package. It does not claim that unresolved MWM policy questions are settled."
+}

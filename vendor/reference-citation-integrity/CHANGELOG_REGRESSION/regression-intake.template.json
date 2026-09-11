@@ -1,0 +1,21 @@
+{
+  "intake_id": "REG-RCI-YYYYMMDD-0001",
+  "reported_at": "YYYY-MM-DDT00:00:00Z",
+  "source": "pilot",
+  "stage": "verification",
+  "run_id": null,
+  "manuscript_version": null,
+  "description": "Describe the observed production or evaluation behavior.",
+  "observed_behavior": "What the package emitted or failed to emit.",
+  "expected_behavior": "What the governing specification and active profile require.",
+  "failure_taxonomy": "unknown",
+  "severity": "medium",
+  "evidence": [{"kind": "run_output", "locator": "path-or-record-locator", "description": "Evidence that permits reproduction."}],
+  "candidate_rule_ids": [],
+  "candidate_fixture_id": null,
+  "reproduction_steps": [],
+  "containment": "State whether release is held and what was preserved.",
+  "proposed_change": null,
+  "disposition": "intake",
+  "decision_log_id": null
+}

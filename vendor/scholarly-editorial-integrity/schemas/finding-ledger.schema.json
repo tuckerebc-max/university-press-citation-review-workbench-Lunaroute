@@ -1,0 +1,20 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://mwm.local/schemas/sei/finding-ledger.schema.json",
+  "title":"MWM SEI Finding Ledger",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["ledger_id","run_id","open_finding_ids","resolved_finding_ids","blocked_finding_ids","high_critical_count","source_unavailable_count","release_disposition","owner_groups"],
+  "properties":{
+    "ledger_id":{"type":"string","pattern":"^SEI-LEDGER-[A-Za-z0-9._-]+$"},
+    "run_id":{"type":"string"},
+    "open_finding_ids":{"type":"array","items":{"type":"string"}},
+    "resolved_finding_ids":{"type":"array","items":{"type":"string"}},
+    "blocked_finding_ids":{"type":"array","items":{"type":"string"}},
+    "high_critical_count":{"type":"integer","minimum":0},
+    "source_unavailable_count":{"type":"integer","minimum":0},
+    "release_disposition":{"type":"string","enum":["ready","ready_with_conditions","not_ready"]},
+    "owner_groups":{"type":"array","items":{"type":"string"}},
+    "last_updated":{"type":["string","null"]}
+  }
+}

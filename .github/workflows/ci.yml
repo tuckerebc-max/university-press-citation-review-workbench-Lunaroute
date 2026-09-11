@@ -1,0 +1,44 @@
+name: Verify workbench
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install test tools
+        run: python -m pip install --disable-pip-version-check -r requirements-dev.txt
+      - name: Run application tests
+        run: python -m unittest discover -s tests -v
+      - name: Compile Python and parse JavaScript
+        shell: pwsh
+        run: |
+          python -m compileall -q upress_workbench
+          node --check upress_workbench/static/app.js
+      - name: Validate integrity packages
+        shell: pwsh
+        run: |
+          python vendor/reference-citation-integrity/scripts/validate_package.py
+          python vendor/reference-citation-integrity/evals/scorer.py --validate-suite
+          python vendor/scholarly-editorial-integrity/scripts/validate_package.py
+          python vendor/scholarly-editorial-integrity/evals/scorer.py --validate-suite --self-test
+      - name: Lint and security checks
+        shell: pwsh
+        run: |
+          python scripts/check_no_secrets.py
+          ruff check .
+          bandit -q -r upress_workbench -s B606
+          pip-audit -r requirements.txt

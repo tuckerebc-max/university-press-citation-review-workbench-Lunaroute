@@ -1,0 +1,12 @@
+{
+  "source_id":"SRC-003",
+  "access_status":"local",
+  "locator":"source-bundle/source-003.pdf#p.4",
+  "queried_at":"2026-08-13",
+  "method":"managed source bundle",
+  "version_or_status":"published; status check pending",
+  "status_notice_locator":null,
+  "confidentiality_status":"approved",
+  "source_owner":null,
+  "notes":"Example record only; no source-status conclusion is asserted."
+}

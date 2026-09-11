@@ -1,0 +1,14 @@
+{
+  "integration_set_id": "MWM-RCI-INTEGRATION-01",
+  "version": "0.1.0",
+  "cases": [
+    {"fixture_id":"FX-INT-001","sequence":["RCI-01","RCI-02","RCI-03","RCI-04","RCI-05","RCI-06","RCI-07","release_gate"],"assertions":["all contexts covered","all source identities verified","evaluation passes","release_status=ready"]},
+    {"fixture_id":"FX-INT-002","sequence":["RCI-01","RCI-02","coverage_gate","release_gate"],"assertions":["orphan reference is not suppressed","release_status=not_ready"]},
+    {"fixture_id":"FX-INT-003","sequence":["RCI-03","RCI-05","RCI-07","release_gate"],"assertions":["DOI mismatch and metadata mismatch remain linked","release_status=not_ready"]},
+    {"fixture_id":"FX-INT-004","sequence":["RCI-03","RCI-04","RCI-05","RCI-07","decision_hooks","release_gate"],"assertions":["dataset and software records remain distinct","unresolved hooks are explicit","release_status=not_ready"]},
+    {"fixture_id":"FX-INT-005","sequence":["import_prior_findings","apply_approved_correction","RCI-01","RCI-02","release_gate"],"assertions":["closed finding is not resurrected","remaining ambiguity blocks","release_status=not_ready"]},
+    {"fixture_id":"FX-INT-006","sequence":["renderer_regression","RCI-06","RCI-QA-001","release_gate"],"assertions":["renderer version is recorded","fixture failure blocks release"]},
+    {"fixture_id":"FX-INT-007","sequence":["import_prior_findings","evidence_gate","release_gate"],"assertions":["prior unresolved findings are retained","release_status=not_ready"]},
+    {"fixture_id":"FX-INT-008","sequence":["RCI-01","RCI-03","handoff_to_sei"],"assertions":["identity work is complete","claim-support request is routed","RCI does not issue a claim-support finding"]}
+  ]
+}

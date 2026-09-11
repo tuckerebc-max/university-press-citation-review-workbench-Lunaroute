@@ -1,0 +1,20 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://mwm.local/schemas/sei/claim-record.schema.json",
+  "title":"MWM SEI Atomic Claim Record",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["claim_id","exact_text","location","claim_type","citation_ids","centrality","source_access_status"],
+  "properties":{
+    "claim_id":{"type":"string","pattern":"^CLAIM-[A-Za-z0-9._-]+$"},
+    "exact_text":{"type":"string"},
+    "location":{"type":"string"},
+    "claim_type":{"type":"string","enum":["descriptive","causal","associational","methodological","historical","normative","quantitative","interpretive"]},
+    "citation_ids":{"type":"array","items":{"type":"string"}},
+    "centrality":{"type":"string","enum":["incidental","supporting","central"]},
+    "source_access_status":{"type":"string","enum":["local","live","web_only","author_supplied","inaccessible","stale","unknown"]},
+    "modality":{"type":["string","null"]},
+    "scope":{"type":["string","null"]},
+    "dependencies":{"type":"array","items":{"type":"string"}}
+  }
+}

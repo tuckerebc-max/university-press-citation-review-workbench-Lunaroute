@@ -1,0 +1,12 @@
+{
+  "claim_id":"CLAIM-example-001",
+  "exact_text":"The intervention is associated with improved attendance in the observed sample.",
+  "location":"example-chapter.docx#section-2.paragraph4",
+  "claim_type":"associational",
+  "citation_ids":["CIT-003"],
+  "centrality":"supporting",
+  "source_access_status":"local",
+  "modality":"is associated with",
+  "scope":"observed sample",
+  "dependencies":["SRC-003"]
+}

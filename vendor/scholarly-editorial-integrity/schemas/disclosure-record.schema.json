@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://mwm.local/schemas/sei/disclosure-record.schema.json",
+  "title":"MWM SEI Disclosure Record",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["disclosure_id","field","applicability","status","evidence","owner"],
+  "properties":{
+    "disclosure_id":{"type":"string","pattern":"^DISC-[A-Za-z0-9._-]+$"},
+    "field":{"type":"string","enum":["funding","competing_interests","ethics","consent","data","code","materials","registration","permissions","AI_use"]},
+    "applicability":{"type":"string","enum":["required","applicable","not_applicable","unknown"]},
+    "status":{"type":"string","enum":["complete","missing","inconsistent","not_applicable_with_rationale","unknown"]},
+    "text_or_locator":{"type":["string","null"]},
+    "evidence":{"type":"array","items":{"type":"string"}},
+    "owner":{"type":"string"},
+    "response_id":{"type":["string","null"]},
+    "decision_id":{"type":["string","null"]}
+  }
+}

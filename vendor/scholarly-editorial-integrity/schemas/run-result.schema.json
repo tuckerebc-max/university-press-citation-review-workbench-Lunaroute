@@ -1,0 +1,28 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://mwm.local/schemas/sei/run-result.schema.json",
+  "title":"MWM SEI Run Result",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["run_id","specification_id","specification_version","chapter_id","chapter_version","stage","trigger","preconditions","summary","release_status","findings","decisions","source_access_records","disclosure_records","contributor_records","ai_events","handoff_dependencies"],
+  "properties":{
+    "run_id":{"type":"string"},
+    "specification_id":{"const":"MWM-SEI-SPEC"},
+    "specification_version":{"type":"string"},
+    "chapter_id":{"type":"string"},
+    "chapter_version":{"type":"string"},
+    "stage":{"type":"string","enum":["intake","review","response","production","release","post_publication"]},
+    "trigger":{"type":"string"},
+    "preconditions":{"type":"string","enum":["pass","partial","fail"]},
+    "summary":{"type":"object","additionalProperties":false,"required":["claims_reviewed","quotations_reviewed","sources_reviewed","open_findings","resolved_findings","high_critical_findings","source_unavailable_findings","referred_cases","confidentiality_incidents"],"properties":{"claims_reviewed":{"type":"integer","minimum":0},"quotations_reviewed":{"type":"integer","minimum":0},"sources_reviewed":{"type":"integer","minimum":0},"open_findings":{"type":"integer","minimum":0},"resolved_findings":{"type":"integer","minimum":0},"high_critical_findings":{"type":"integer","minimum":0},"source_unavailable_findings":{"type":"integer","minimum":0},"referred_cases":{"type":"integer","minimum":0},"confidentiality_incidents":{"type":"integer","minimum":0}}},
+    "release_status":{"type":"string","enum":["ready","ready_with_conditions","not_ready"]},
+    "findings":{"type":"array","items":{"$ref":"finding.schema.json"}},
+    "decisions":{"type":"array","items":{"$ref":"decision-record.schema.json"}},
+    "source_access_records":{"type":"array","items":{"$ref":"source-access-record.schema.json"}},
+    "disclosure_records":{"type":"array","items":{"$ref":"disclosure-record.schema.json"}},
+    "contributor_records":{"type":"array","items":{"$ref":"contributor-record.schema.json"}},
+    "ai_events":{"type":"array","items":{"$ref":"ai-event-record.schema.json"}},
+    "handoff_dependencies":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["owner_family","dependency_type","finding_ids","status"],"properties":{"owner_family":{"type":"string"},"dependency_type":{"type":"string"},"finding_ids":{"type":"array","items":{"type":"string"}},"status":{"type":"string","enum":["open","recorded","resolved"]}}}},
+    "ledger_id":{"type":["string","null"]}
+  }
+}

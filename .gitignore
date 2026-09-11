@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+data/
+qa/
+.release-checks/
+.ruff_cache/
+.pytest_cache/
+.venv/
+.venv-*/
+.coverage

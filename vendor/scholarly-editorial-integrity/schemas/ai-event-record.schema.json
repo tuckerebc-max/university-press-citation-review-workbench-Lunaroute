@@ -1,0 +1,23 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://mwm.local/schemas/sei/ai-event-record.schema.json",
+  "title":"MWM SEI Editorial AI Event",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["event_id","tool_name","tool_version","date","purpose","material_scope","authorization_status","confidentiality_status","output_treatment","human_reviewer","disclosure_status","incident_status"],
+  "properties":{
+    "event_id":{"type":"string","pattern":"^AI-SEI-[A-Za-z0-9._-]+$"},
+    "tool_name":{"type":"string"},
+    "tool_version":{"type":"string"},
+    "date":{"type":"string"},
+    "purpose":{"type":"string"},
+    "material_scope":{"type":"string"},
+    "authorization_status":{"type":"string","enum":["approved","unapproved","unknown","not_applicable"]},
+    "confidentiality_status":{"type":"string","enum":["safe","restricted","breach_possible","breach_confirmed","unknown"]},
+    "output_treatment":{"type":"string","enum":["accepted","edited","rejected","not_used","unknown"]},
+    "human_reviewer":{"type":["string","null"]},
+    "disclosure_status":{"type":"string","enum":["complete","missing","not_applicable","unknown"]},
+    "incident_status":{"type":"string","enum":["none","open","referred","resolved"]},
+    "evidence_locator":{"type":["string","null"]}
+  }
+}

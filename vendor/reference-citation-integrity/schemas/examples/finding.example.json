@@ -1,0 +1,19 @@
+{
+  "finding_id": "RCI-20260813-0001",
+  "skill_id": "RCI-05",
+  "rule_id": "RCI-ID-003",
+  "severity": "high",
+  "status": "needs_review",
+  "action": "ESCALATE",
+  "confidence": 0.99,
+  "location": {"file": "chapter.docx", "locator": "references.item12", "context_type": "reference_list"},
+  "observed": {"raw_text": "doi:10.1234/example", "normalized_value": "https://doi.org/10.1234/example", "source_record_id": "R001"},
+  "expected": {"value": "DOI landing metadata must match the cited object", "rule_profile": "MWM-APA7-v0.1"},
+  "evidence": [{"evidence_id": "E001", "source_id": "S012", "locator": "provider-record", "retrieved_at": "2026-08-13T12:00:00Z", "relevance": "DOI resolves to a different title"}],
+  "provenance": {"source_of_record": "registry", "retrievals": [{"source_id": "S012", "retrieved_at": "2026-08-13T12:00:00Z"}]},
+  "reason": "The identifier resolves, but field-level comparison shows a different work.",
+  "proposed_change": null,
+  "dependencies": [],
+  "human_decision": null,
+  "decision_log_id": null
+}

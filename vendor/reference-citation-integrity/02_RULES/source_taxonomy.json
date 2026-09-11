@@ -1,0 +1,21 @@
+{
+  "taxonomy_id": "MWM-RCI-SOURCE-TYPES",
+  "version": "0.1.0",
+  "status": "initial-release",
+  "source_types": [
+    {"id": "journal_article", "label": "Journal article", "minimum_fields": ["creators_or_group_author", "date", "title", "container_title"], "identifier_expectation": "as_available_or_project_required"},
+    {"id": "book", "label": "Book", "minimum_fields": ["creators_or_group_author", "date", "title", "publisher"], "identifier_expectation": "as_available_or_project_required"},
+    {"id": "edited_book_chapter", "label": "Chapter or contribution in an edited book", "minimum_fields": ["chapter_creators", "date", "chapter_title", "editors", "book_title", "publisher"], "identifier_expectation": "as_available_or_project_required"},
+    {"id": "report_or_working_paper", "label": "Report or working paper", "minimum_fields": ["creators_or_group_author", "date", "title", "publisher_or_issuing_body"], "identifier_expectation": "as_available_or_project_required"},
+    {"id": "conference_item", "label": "Conference presentation or proceedings item", "minimum_fields": ["creators_or_group_author", "date", "title", "event_or_container"], "identifier_expectation": "as_available_or_project_required"},
+    {"id": "dissertation_or_thesis", "label": "Dissertation or thesis", "minimum_fields": ["creator", "date", "title", "institution_or_repository"], "identifier_expectation": "as_available_or_project_required"},
+    {"id": "web_page", "label": "Website or web page", "minimum_fields": ["creator_or_group_author_or_title", "date_or_no_date", "title", "stable_url"], "identifier_expectation": "access_date_policy_hook"},
+    {"id": "dataset", "label": "Dataset", "minimum_fields": ["creator_or_group_author", "date", "title", "resource_type", "version_when_available"], "identifier_expectation": "dataset_identifier_policy_hook"},
+    {"id": "software_release", "label": "Software, package, or release", "minimum_fields": ["creator_or_group_author", "date", "title", "version_when_available", "release_or_repository_route"], "identifier_expectation": "software_policy_hook"},
+    {"id": "preprint", "label": "Preprint", "minimum_fields": ["creators_or_group_author", "date", "title", "repository_or_server"], "identifier_expectation": "as_available_or_project_required"},
+    {"id": "audiovisual_or_other", "label": "Audiovisual or other nontraditional item", "minimum_fields": ["creator_or_group_author", "date_or_no_date", "title", "container_or_host"], "identifier_expectation": "as_available_or_project_required"},
+    {"id": "unknown_or_ambiguous", "label": "Unknown or ambiguous source type", "minimum_fields": [], "identifier_expectation": "human_review_required"}
+  ],
+  "typed_relations": ["version_of", "corrects", "translation_of", "preprint_of", "published_as", "supplements", "related_to", "unknown_relation"],
+  "identity_rule": "Do not infer source type from file extension alone. Preserve distinct objects until evidence and editorial decision establish a relation."
+}

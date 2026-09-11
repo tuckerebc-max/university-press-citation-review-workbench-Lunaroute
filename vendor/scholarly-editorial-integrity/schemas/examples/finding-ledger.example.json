@@ -1,0 +1,12 @@
+{
+  "ledger_id":"SEI-LEDGER-example-001",
+  "run_id":"MWM-SEI-example-001",
+  "open_finding_ids":["SEI-example-001"],
+  "resolved_finding_ids":[],
+  "blocked_finding_ids":[],
+  "high_critical_count":1,
+  "source_unavailable_count":0,
+  "release_disposition":"not_ready",
+  "owner_groups":["author/editor"],
+  "last_updated":"2026-08-13"
+}

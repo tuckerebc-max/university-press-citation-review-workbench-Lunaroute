@@ -1,0 +1,14 @@
+{
+  "decision_log_id": "DEC-RCI-20260813-001",
+  "decision_hook_id": "RCI-DH-006",
+  "status": "open",
+  "question": "Which deterministic transforms may be automatic?",
+  "alternatives": [{"id": "A", "description": "Enable only canonical DOI display normalization", "consequence": "Identity-preserving normalization may be automatic."}, {"id": "B", "description": "Disable all automatic transforms", "consequence": "All transformations are suggested or flagged."}],
+  "selected_value": null,
+  "evidence_ids": [],
+  "rationale": "MWM policy has not yet been adjudicated.",
+  "decision_owner": "MWM editorial adjudication",
+  "decided_at": null,
+  "effective_version": null,
+  "regression_fixture_ids": []
+}

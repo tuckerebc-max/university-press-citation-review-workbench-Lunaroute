@@ -1,0 +1,14 @@
+{
+  "control_set_id": "MWM-RCI-ADVERSARIAL-NEGATIVE-01",
+  "version": "0.1.0",
+  "adversarial_fixture_ids": ["FX-ADV-001","FX-ADV-002","FX-ADV-003","FX-ADV-004","FX-ADV-005","FX-ADV-006","FX-ADV-007","FX-ADV-008","FX-ADV-009","FX-ADV-010","FX-ADV-011","FX-ADV-012"],
+  "negative_control_fixture_ids": ["FX-NEG-001","FX-NEG-002","FX-NEG-003","FX-NEG-004","FX-NEG-005","FX-NEG-006","FX-NEG-007","FX-NEG-008","FX-NEG-009","FX-NEG-010"],
+  "purpose": "Catch false positives, silent identity changes, overblocking, source substitution, and scope drift.",
+  "required_behavior": [
+    "A resolving DOI with a metadata mismatch escalates; it never silently replaces the source record.",
+    "Similarity never confirms identity or authorizes a merge.",
+    "An inaccessible URL is not treated as a missing source when identity evidence exists.",
+    "Personal communications and approved further-reading exceptions are not falsely reported as orphan or missing-reference defects.",
+    "Claim support is routed to Scholarly/Editorial Integrity rather than decided by RCI."
+  ]
+}

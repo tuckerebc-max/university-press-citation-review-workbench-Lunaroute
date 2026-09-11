@@ -1,0 +1,8 @@
+{
+  "policy_id":"MWM-SEI-REGRESSION-POLICY",
+  "version":"0.1.0",
+  "principles":["Capture every unsupported allegation, source-status, authorship, disclosure, AI/confidentiality, evidence, response, remedy, and release failure before changing the package.","A reproducible case receives a fixture or a documented reason why a fixture is not appropriate.","Preserve original findings, protected evidence, responses, and version lineage.","Zero-tolerance failures block release until neutral wording, evidence, ownership, and regression tests are repaired.","Unresolved MWM integrity policy remains a decision hook; regression repair may not silently decide it."],
+  "severity_response":{"critical":"stop processing, preserve evidence, hold or rollback, notify security/senior owner, add fixture","high":"hold affected release, route to authorized owner, add or amend fixture, require verification","medium":"query or track, add fixture when reproducible","low":"record and review in maintenance cycle"},
+  "required_artifacts":["regression_intake","production_failure_when_applicable","neutral_finding","source_access_or_protected_record","owner_and_route","decision_or_response","fixture_result","changelog_entry"],
+  "release_rule":"No unsupported formal allegation, source-unavailable certification, authorship arbitration, unapproved confidentiality processing, lost response, silent status/remedy conflation, false PASS, or unresolved critical/high case may ship."
+}

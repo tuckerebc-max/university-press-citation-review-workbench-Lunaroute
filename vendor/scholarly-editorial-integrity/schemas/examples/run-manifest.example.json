@@ -1,0 +1,16 @@
+{
+  "run_id":"MWM-SEI-example-001",
+  "chapter_id":"MWM-CH-EXAMPLE",
+  "chapter_version":"draft-01",
+  "stage":"review",
+  "trigger":"intake_baseline",
+  "governing_rule_versions":["MWM-SEI-RULES@0.1.0","MWM-SGI-RULES@0.1.0"],
+  "citation_graph_status":"partial",
+  "confidentiality_policy":"MWM-CONFIDENTIALITY-UNSET",
+  "source_access_log":"MWM-SOURCE-ACCESS-UNSET",
+  "case_owner":null,
+  "tool_policy":"Approved tools only; protected records require restricted path.",
+  "prior_run_id":null,
+  "chapter_profile":"MWM-CHAPTER-PROFILE-UNSET",
+  "manuscript_file":"example-chapter.docx"
+}

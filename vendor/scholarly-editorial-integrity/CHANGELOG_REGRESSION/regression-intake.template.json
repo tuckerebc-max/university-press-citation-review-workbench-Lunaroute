@@ -1,0 +1,20 @@
+{
+  "regression_id":"SEI-REG-example-001",
+  "reported_at":"2026-08-13",
+  "reported_by":"integrity QA",
+  "source":"fixture",
+  "trigger":"Describe the source comparison, signal, response, protected-record event, decision, or release condition that exposed the failure.",
+  "fixture_or_run_id":"FX-ADV-001",
+  "observed_behavior":"Describe what the package did.",
+  "expected_behavior":"Describe the expected neutral, evidence-first behavior grounded in the SEI specification and active rule.",
+  "severity":"high",
+  "status":"open",
+  "owner":"MWM integrity lead — decision hook",
+  "affected_rule_ids":["SEI-OVERLAP-001","SEI-SIGNAL-001"],
+  "affected_decision_hooks":[],
+  "affected_finding_ids":["SEI-example-001"],
+  "reproduction":["Run the fixture or provide the smallest authorized case record and evidence path."],
+  "resolution":"Pending triage; no formal allegation or policy decision is implied.",
+  "replacement_fixture_ids":[],
+  "verified_at":null
+}

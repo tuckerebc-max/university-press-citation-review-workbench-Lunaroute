@@ -1,0 +1,14 @@
+{
+  "package_id":"MWM-EDITORIAL-SEI",
+  "family":"Scholarly/Editorial Integrity",
+  "package_version":"0.1.0",
+  "status":"draft-for-editorial-owner-review",
+  "governing_specification":{"path":"01_SPECIFICATION.md","source_filename":"Scholarly_Editorial_Integrity_Specification.md","sha256":"79E5A4FE73DFDD1422362F161BC9323BF02A7A52F8F3B82FA9267E72D8F48AD0"},
+  "components":{"01_specification":"01_SPECIFICATION.md","01_specification_docx":"01_SPECIFICATION.docx","02_rules":"02_RULES/","03_skill":"SKILL.md","04_schemas":"schemas/","05_evals":"evals/","06_changelog_regression":"CHANGELOG_REGRESSION/"},
+  "rule_registry":{"path":"02_RULES/ruleset.json","id":"MWM-SEI-RULES","version":"0.1.0","rule_count":30,"decision_hook_count":9,"formal_allegation_policy":"all rules formal_allegation_allowed=false"},
+  "protected_records":{"path":"02_RULES/protected_records.json","default":"approved tools and restricted access only"},
+  "evaluation":{"catalog":"evals/fixture_catalog.json","fixture_count":42,"crosswalk":"evals/rule_fixture_crosswalk.json","scorer":"evals/scorer.py","classes":["clean","single_error","adversarial","negative_control","integration"]},
+  "qa":{"validator":"scripts/validate_package.py","commands":["python scripts/validate_package.py","python evals/scorer.py --validate-suite --self-test","python -m py_compile evals/scorer.py scripts/validate_package.py"],"zero_tolerance_policy":"No unsupported formal allegation, source-unavailable certification, authorship arbitration, unapproved confidentiality processing, silent status/remedy conflation, lost response, false PASS, or unresolved critical/high case may ship."},
+  "cross_family_contracts":"schemas/cross-family-contracts.json",
+  "policy_boundary":"Open MWM integrity decisions remain explicit hooks; the package preserves signals and routes rather than adjudicating intent, authorship, misconduct, law, ethics, or source truth."
+}

@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="workbench-token" content="__WORKBENCH_TOKEN__">
+  <title>University Press Citation Review</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="masthead">
+    <div class="brand-mark" aria-hidden="true">UP</div>
+    <div>
+      <p class="overline">Tech Triangle · Navy Yard Workbench Foundry</p>
+      <h1>University Press Citation Review</h1>
+    </div>
+    <div id="health" class="health">Checking readiness…</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="kicker">A guarded path from chapter folder to author packet</p>
+        <h2>Review a whole volume without losing the evidence trail.</h2>
+      </div>
+      <p class="hero-copy">The workbench preserves every source chapter, runs Reference and Citation Integrity before Scholarly and Editorial Integrity, and packages proposed changes for human review. It never authorizes publication.</p>
+    </section>
+
+    <section class="workspace-grid">
+      <form id="run-form" class="panel form-panel">
+        <div class="section-heading">
+          <span class="step">1</span>
+          <div><p class="overline">Source set</p><h3>Choose the chapter folder</h3></div>
+        </div>
+
+        <label>Chapter folder
+          <input id="input-root" name="input_root" type="text" required placeholder="C:\Press\Volume 1\Chapters" autocomplete="off" spellcheck="false">
+        </label>
+        <div class="row-actions">
+          <button id="scan-button" class="button secondary" type="button">Scan folder</button>
+          <span id="scan-result" class="quiet">Supports DOCX, Markdown, and UTF-8 text.</span>
+        </div>
+        <label>Output parent folder
+          <input id="output-parent" name="output_parent" type="text" required placeholder="C:\Press\Volume 1\Reviews" autocomplete="off" spellcheck="false">
+        </label>
+        <div class="two-col">
+          <label>Project label
+            <input name="project_label" type="text" value="University Press chapter review" maxlength="160">
+          </label>
+          <label>Editor or case owner
+            <input name="case_owner" type="text" required placeholder="Name or editorial role" maxlength="160">
+          </label>
+        </div>
+
+        <div class="section-heading divider">
+          <span class="step">2</span>
+          <div><p class="overline">Policy gate</p><h3>Confirm the data path</h3></div>
+        </div>
+        <div class="two-col">
+          <label>Manuscript classification
+            <select name="classification" required>
+              <option value="unpublished_approved">Unpublished · approved for LunaRoute</option>
+              <option value="public">Public</option>
+              <option value="restricted">Restricted · do not process</option>
+            </select>
+          </label>
+          <label>Review mode
+            <select name="run_mode">
+              <option value="baseline">Baseline inventory</option>
+              <option value="full">Full review</option>
+              <option value="release">Release check</option>
+              <option value="incremental">Incremental review</option>
+              <option value="proof">Proof check</option>
+            </select>
+          </label>
+        </div>
+        <label class="checkline important">
+          <input name="provider_approved" type="checkbox" required>
+          <span>I confirm LunaRoute is an approved external processing path for every chapter in this manifest.</span>
+        </label>
+
+        <div class="section-heading divider">
+          <span class="step">3</span>
+          <div><p class="overline">Execution plan</p><h3>Set the review lane</h3></div>
+        </div>
+        <div class="three-col">
+          <label>GLM model
+            <select name="model">
+              <option value="glm-5.3-background">GLM 5.3 Background</option>
+              <option value="glm-5.3">GLM 5.3 Foreground</option>
+              <option value="glm-5.3-flash-background">GLM 5.3 Flash Background</option>
+              <option value="glm-5.3-flash">GLM 5.3 Flash</option>
+            </select>
+          </label>
+          <label>Parallel chapters
+            <select name="concurrency">
+              <option value="2">2</option>
+              <option value="3" selected>3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </label>
+          <label class="checkline compact">
+            <input name="crossref_enabled" type="checkbox" checked>
+            <span>Crossref DOI candidate lookup</span>
+          </label>
+        </div>
+
+        <div id="form-error" class="error" role="alert" hidden></div>
+        <button id="run-button" class="button primary" type="submit">Build author review packets</button>
+        <p class="fine-print">A new output folder is created. Source files are hashed before approval and again before every external stage.</p>
+      </form>
+
+      <aside class="side-stack">
+        <section id="active-run" class="panel run-panel" hidden>
+          <p class="overline">Active run</p>
+          <h3 id="run-title">Preparing review</h3>
+          <div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div>
+          <div class="metrics">
+            <div><strong id="metric-complete">0</strong><span>packets</span></div>
+            <div><strong id="metric-reviewing">0</strong><span>reviewing</span></div>
+            <div><strong id="metric-exceptions">0</strong><span>exceptions</span></div>
+          </div>
+          <p id="run-path" class="path"></p>
+          <div class="row-actions">
+            <button id="open-output" class="button secondary" type="button" hidden>Open output folder</button>
+            <button id="cancel-run" class="button ghost" type="button">Cancel safely</button>
+          </div>
+          <div id="chapter-list" class="chapter-list"></div>
+        </section>
+
+        <section class="panel contract-panel">
+          <p class="overline">Fixed professional contract</p>
+          <h3>What this workbench will not do</h3>
+          <ul>
+            <li>Overwrite an author’s source chapter</li>
+            <li>Turn provider metadata into a verdict</li>
+            <li>Infer misconduct, intent, or authorship entitlement</li>
+            <li>Hide unresolved evidence or policy decisions</li>
+            <li>Accept edits or authorize publication</li>
+          </ul>
+        </section>
+
+        <section class="panel recent-panel">
+          <div class="section-heading small"><div><p class="overline">Receipts</p><h3>Recent runs</h3></div></div>
+          <div id="recent-runs" class="recent-runs"><p class="quiet">No runs yet.</p></div>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <footer><span>University Press Workbench v0.1</span><span>Human editorial acceptance remains required</span></footer>
+  <script src="/app.js" defer></script>
+</body>
+</html>

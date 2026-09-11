@@ -1,0 +1,15 @@
+{
+  "event_id":"AI-SEI-example-001",
+  "tool_name":"approved-internal-tool",
+  "tool_version":"version-unset",
+  "date":"2026-08-13",
+  "purpose":"Editorial consistency review",
+  "material_scope":"Non-confidential excerpt approved for processing",
+  "authorization_status":"approved",
+  "confidentiality_status":"safe",
+  "output_treatment":"edited",
+  "human_reviewer":"editorial team",
+  "disclosure_status":"unknown",
+  "incident_status":"none",
+  "evidence_locator":"MWM-AI-USE-RECORD-UNSET"
+}

@@ -1,0 +1,16 @@
+{
+  "registry_id": "MWM-RCI-AUTHORITY",
+  "version": "0.1.0",
+  "status": "source-locator-registry",
+  "specification_id": "MWM-RCI-SPEC",
+  "tiers": [
+    {"tier": 1, "name": "project_authority", "sources": ["MWM chapter guidance", "approved MWM decisions"], "role": "controls project requirements, exceptions, and release boundaries"},
+    {"tier": 2, "name": "adopted_style_authority", "sources": ["MWM-APA rule package", "supplied APA guide", "official APA sources"], "role": "controls citation and reference presentation"},
+    {"tier": 3, "name": "identity_and_metadata_standards", "sources": ["DOI Handbook", "DataCite", "NLM", "JATS4R"], "role": "controls source typing, identity evidence, metadata fields, and relations"},
+    {"tier": 4, "name": "rendering_implementation", "sources": ["CSL", "DataCite citation mapping"], "role": "controls deterministic rendering and regression behavior"},
+    {"tier": 5, "name": "provider_documentation", "sources": ["Crossref"], "role": "supplies candidate metadata, identifier operations, and link-display procedures"},
+    {"tier": 6, "name": "implementation_exemplars", "sources": ["AISL guides and review", "SEFI template"], "role": "informs reporting and handoff design without overriding MWM"}
+  ],
+  "evidence_boundary": "A captured access-gateway response is not evidence of official APA guidance. Record official URLs or source locators in the authority registry and escalate disputed edge cases.",
+  "required_provenance_fields": ["source_id_or_locator", "authority_tier", "retrieved_at_or_version", "relevance", "access_status"]
+}

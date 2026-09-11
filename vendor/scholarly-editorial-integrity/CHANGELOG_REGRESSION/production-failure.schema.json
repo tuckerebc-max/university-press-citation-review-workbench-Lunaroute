@@ -1,0 +1,26 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://mwm.local/schemas/sei/production-failure.schema.json",
+  "title":"MWM SEI Production Failure Capture",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["failure_id","detected_at","chapter_or_asset","run_id","stage","failure_class","impact","containment","evidence","release_effect","owner","follow_up"],
+  "properties":{
+    "failure_id":{"type":"string","pattern":"^SEI-PF-[A-Za-z0-9._-]+$"},
+    "detected_at":{"type":"string","minLength":1},
+    "chapter_or_asset":{"type":"string","minLength":1},
+    "run_id":{"type":"string","minLength":1},
+    "stage":{"type":"string","enum":["intake","review","response","production","release","post_publication","released"]},
+    "failure_class":{"type":"string","enum":["unsupported_allegation","source_unavailable_certified","claim_scope_mismatch","quotation_mismatch","source_status_error","authorship_arbitration","disclosure_inference","confidentiality_incident","missing_evidence","lost_response","remedy_inflation","internal_contradiction_repaired","release_gate_failure"]},
+    "impact":{"type":"string","enum":["contained","chapter_local","multi_chapter","release_blocking","publicly_released"]},
+    "containment":{"type":"string","minLength":1},
+    "evidence":{"type":"array","minItems":1,"items":{"type":"object","required":["type","locator"],"properties":{"type":{"type":"string"},"locator":{"type":"string"},"description":{"type":"string"}}}},
+    "release_effect":{"type":"string","enum":["none","hold","rollback","post_release_correction","decision_required"]},
+    "owner":{"type":"string","minLength":1},
+    "related_regression_ids":{"type":"array","items":{"type":"string","pattern":"^SEI-REG-[A-Za-z0-9._-]+$"}},
+    "affected_rule_ids":{"type":"array","items":{"type":"string","pattern":"^SEI-[A-Z0-9-]+$"}},
+    "affected_finding_ids":{"type":"array","items":{"type":"string","pattern":"^SEI-[A-Za-z0-9._-]+$"}},
+    "follow_up":{"type":"string","minLength":1},
+    "closed_at":{"type":["string","null"]}
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "contract_id":"MWM-SEI-CROSS-FAMILY-CONTRACTS",
+  "version":"0.1.0",
+  "inbound":[
+    {"family":"Reference & Citation Integrity","contract":"resolved citation/reference graph, source identity, locators, and access/status records","required_fields":["citation_graph_status","source_ids","reference_ids"]},
+    {"family":"Style-Guide Implementation","contract":"MWM authority, protected text, disclosure language, and terminology boundaries","required_fields":["rule_registry_version","protected_context_policy"]},
+    {"family":"Technical Editing","contract":"technical object IDs, table/figure/source relationships, and production dependencies","required_fields":["technical_object_ids_when_relevant"]},
+    {"family":"Editorial QA & Orchestration","contract":"stage, trigger, confidentiality permissions, owner, and release mode","required_fields":["run_id","stage","case_owner"]}
+  ],
+  "outbound":[
+    {"family":"Reference & Citation Integrity","contract":"claim/source identity or status mismatch and citation/source evidence dependency","payload_fields":["finding_id","source_id","access_status","source_status_effect"]},
+    {"family":"Technical Editing","contract":"source/credit, table/figure, object, or production relationship issue","payload_fields":["finding_id","object_id","source_record","owner_route"]},
+    {"family":"Copyediting","contract":"meaning-bearing sentence, quotation, disclosure, or source-language issue","payload_fields":["finding_id","exact_text","protected_status","decision_owner"]},
+    {"family":"Chapter Completeness & Production Readiness","contract":"missing disclosure, contributor, source-status, or release component","payload_fields":["finding_id","required_component","release_effect"]},
+    {"family":"Editorial QA & Orchestration","contract":"integrity ledger, decisions, cases, confidentiality incidents, and release status","payload_fields":["run_id","finding_ids","decision_ids","release_status"]}
+  ],
+  "boundary_invariants":["No intent inference","No formal allegation without authorized record","No authorship arbitration","No source-unavailable certification","No unapproved confidential processing","No silent meaning/status change"]
+}

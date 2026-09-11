@@ -1,0 +1,20 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://mwm.local/schemas/sei/source-access-record.schema.json",
+  "title":"MWM SEI Source Access and Status Record",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["source_id","access_status","locator","queried_at","method","version_or_status","confidentiality_status"],
+  "properties":{
+    "source_id":{"type":"string","minLength":1},
+    "access_status":{"type":"string","enum":["local","live","web_only","author_supplied","inaccessible","stale","unknown"]},
+    "locator":{"type":"string","minLength":1},
+    "queried_at":{"type":["string","null"]},
+    "method":{"type":"string","minLength":1},
+    "version_or_status":{"type":"string","minLength":1},
+    "status_notice_locator":{"type":["string","null"]},
+    "confidentiality_status":{"type":"string","enum":["approved","restricted","unknown","not_applicable"]},
+    "source_owner":{"type":["string","null"]},
+    "notes":{"type":["string","null"]}
+  }
+}

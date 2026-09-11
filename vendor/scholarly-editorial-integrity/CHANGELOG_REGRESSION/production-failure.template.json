@@ -1,0 +1,18 @@
+{
+  "failure_id":"SEI-PF-example-001",
+  "detected_at":"2026-08-13",
+  "chapter_or_asset":"example-chapter.docx",
+  "run_id":"MWM-SEI-example-001",
+  "stage":"release",
+  "failure_class":"unsupported_allegation",
+  "impact":"release_blocking",
+  "containment":"Hold the release and preserve the neutral evidence-backed case record.",
+  "evidence":[{"type":"finding","locator":"SEI-example-001","description":"Formal term used without authorized record."}],
+  "release_effect":"hold",
+  "owner":"MWM integrity lead — decision hook",
+  "related_regression_ids":["SEI-REG-example-001"],
+  "affected_rule_ids":["SEI-SIGNAL-001","SEI-RELEASE-001"],
+  "affected_finding_ids":["SEI-example-001"],
+  "follow_up":"Replace the formal allegation with neutral signal language, preserve evidence, and obtain authorized review.",
+  "closed_at":null
+}

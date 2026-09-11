@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mwm.local/schemas/rci/fixture-contract.schema.json",
+  "title": "MWM RCI Gold Fixture",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["fixture_id", "kind", "title", "synthetic", "input", "gold"],
+  "properties": {
+    "fixture_id": {"type": "string", "pattern": "^FX-(CLEAN|ERR|ADV|NEG|INT)-[0-9]{3}$"},
+    "kind": {"type": "string", "enum": ["clean", "single_error", "adversarial", "negative_control", "integration"]},
+    "title": {"type": "string"},
+    "synthetic": {"const": true},
+    "input": {"type": "object", "required": ["scenario", "contexts"], "properties": {"scenario": {"type": "string"}, "contexts": {"type": "array", "items": {"type": "string"}}, "profile_flags": {"type": "array", "items": {"type": "string"}}, "evidence_state": {"type": "string"}}},
+    "gold": {"type": "object", "required": ["expected_release_status", "expected_rule_ids", "expected_actions", "must_not_emit_rule_ids"], "properties": {"expected_release_status": {"type": "string", "enum": ["ready", "ready_with_conditions", "not_ready"]}, "expected_rule_ids": {"type": "array", "items": {"type": "string"}}, "expected_actions": {"type": "array", "items": {"type": "string"}}, "expected_statuses": {"type": "array", "items": {"type": "string"}}, "must_not_emit_rule_ids": {"type": "array", "items": {"type": "string"}}, "required_decision_hooks": {"type": "array", "items": {"type": "string"}}, "expected_routes": {"type": "array", "items": {"type": "string"}}, "zero_tolerance": {"type": "boolean"}}}
+  }
+}

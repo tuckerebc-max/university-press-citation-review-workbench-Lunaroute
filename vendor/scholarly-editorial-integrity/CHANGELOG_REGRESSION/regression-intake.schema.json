@@ -1,0 +1,28 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://mwm.local/schemas/sei/regression-intake.schema.json",
+  "title":"MWM SEI Regression Intake",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["regression_id","reported_at","reported_by","source","trigger","fixture_or_run_id","observed_behavior","expected_behavior","severity","status","owner","resolution"],
+  "properties":{
+    "regression_id":{"type":"string","pattern":"^SEI-REG-[A-Za-z0-9._-]+$"},
+    "reported_at":{"type":"string","minLength":1},
+    "reported_by":{"type":"string","minLength":1},
+    "source":{"type":"string","enum":["fixture","production_run","human_review","cross_family_handoff","specification_change","rule_change","author_response","status_change","security_incident"]},
+    "trigger":{"type":"string","minLength":1},
+    "fixture_or_run_id":{"type":"string","minLength":1},
+    "observed_behavior":{"type":"string","minLength":1},
+    "expected_behavior":{"type":"string","minLength":1},
+    "severity":{"type":"string","enum":["critical","high","medium","low"]},
+    "status":{"type":"string","enum":["open","triaged","reproduced","fixed","verified","wont_fix","blocked"]},
+    "owner":{"type":"string","minLength":1},
+    "affected_rule_ids":{"type":"array","items":{"type":"string","pattern":"^SEI-[A-Z0-9-]+$"}},
+    "affected_decision_hooks":{"type":"array","items":{"type":"string","pattern":"^SEI-DH-[0-9]{3}$"}},
+    "affected_finding_ids":{"type":"array","items":{"type":"string","pattern":"^SEI-[A-Za-z0-9._-]+$"}},
+    "reproduction":{"type":"array","items":{"type":"string"}},
+    "resolution":{"type":"string","minLength":1},
+    "replacement_fixture_ids":{"type":"array","items":{"type":"string"}},
+    "verified_at":{"type":["string","null"]}
+  }
+}

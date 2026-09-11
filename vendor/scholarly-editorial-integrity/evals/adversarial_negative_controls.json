@@ -1,0 +1,7 @@
+{
+  "control_set_id":"MWM-SEI-ADVERSARIAL-NEGATIVE-01",
+  "version":"0.1.0",
+  "adversarial_fixture_ids":["FX-ADV-001","FX-ADV-002","FX-ADV-003","FX-ADV-004","FX-ADV-005","FX-ADV-006","FX-ADV-007","FX-ADV-008","FX-ADV-009","FX-ADV-010"],
+  "negative_control_fixture_ids":["FX-NEG-001","FX-NEG-002","FX-NEG-003","FX-NEG-004","FX-NEG-005","FX-NEG-006","FX-NEG-007","FX-NEG-008"],
+  "required_behavior":["No intent or misconduct inference","No authorship arbitration","No source-unavailable certification","No formal allegation from similarity score","No affiliation-based conflict inference","Distinct source-status remedies","Immediate confidentiality escalation","Preserve responses and disagreement"]
+}

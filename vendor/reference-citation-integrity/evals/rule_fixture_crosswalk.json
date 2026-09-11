@@ -1,0 +1,32 @@
+{
+  "crosswalk_id": "MWM-RCI-RULE-FIXTURE-CROSSWALK",
+  "version": "0.1.0",
+  "evaluation_set_id": "MWM-RCI-EVAL-01",
+  "coverage_policy": {"required_fixture_classes": ["positive", "negative", "adversarial"], "integration_required_for": ["RCI-QA-001", "RCI-EVID-001"], "zero_tolerance_rules": ["RCI-REC-001", "RCI-REC-002", "RCI-ID-003", "RCI-ANOM-001", "RCI-ANOM-002", "RCI-QA-001"]},
+  "rows": [
+    {"rule_id":"RCI-AUTH-001","positive":["FX-CLEAN-001","FX-NEG-003"],"negative":["FX-NEG-002"],"adversarial":["FX-ADV-012"],"integration":["FX-INT-004"]},
+    {"rule_id":"RCI-AUTH-002","positive":["FX-CLEAN-001","FX-CLEAN-006"],"negative":["FX-NEG-003"],"adversarial":["FX-ADV-012"],"integration":["FX-INT-001"]},
+    {"rule_id":"RCI-REC-001","positive":["FX-CLEAN-001","FX-NEG-007"],"negative":["FX-NEG-001","FX-NEG-008"],"adversarial":["FX-ADV-005","FX-ADV-008"],"integration":["FX-INT-005"]},
+    {"rule_id":"RCI-REC-002","positive":["FX-CLEAN-001"],"negative":["FX-NEG-001","FX-NEG-002"],"adversarial":["FX-ADV-005"],"integration":["FX-INT-002"]},
+    {"rule_id":"RCI-COV-001","positive":["FX-CLEAN-003","FX-NEG-008"],"negative":["FX-CLEAN-001"],"adversarial":["FX-ADV-005"],"integration":["FX-INT-002"]},
+    {"rule_id":"RCI-ID-001","positive":["FX-CLEAN-001","FX-NEG-004"],"negative":["FX-CLEAN-005"],"adversarial":["FX-ADV-006","FX-ADV-007"],"integration":["FX-INT-003"]},
+    {"rule_id":"RCI-ID-002","positive":["FX-CLEAN-001","FX-NEG-006"],"negative":["FX-CLEAN-002"],"adversarial":["FX-ADV-003","FX-ADV-004"],"integration":["FX-INT-003"]},
+    {"rule_id":"RCI-ID-003","positive":["FX-CLEAN-001","FX-NEG-003"],"negative":["FX-NEG-010"],"adversarial":["FX-ADV-001","FX-ADV-003","FX-ADV-007"],"integration":["FX-INT-003"]},
+    {"rule_id":"RCI-ID-004","positive":["FX-CLEAN-005","FX-NEG-003"],"negative":["FX-CLEAN-001"],"adversarial":["FX-ADV-003"],"integration":["FX-INT-003"]},
+    {"rule_id":"RCI-TYPE-001","positive":["FX-CLEAN-001","FX-NEG-004"],"negative":["FX-NEG-010"],"adversarial":["FX-ADV-004","FX-ADV-011"],"integration":["FX-INT-004"]},
+    {"rule_id":"RCI-FMT-001","positive":["FX-CLEAN-001","FX-CLEAN-006"],"negative":["FX-NEG-003"],"adversarial":["FX-ADV-012"],"integration":["FX-INT-006"]},
+    {"rule_id":"RCI-FMT-002","positive":["FX-CLEAN-005","FX-NEG-003"],"negative":["FX-CLEAN-001"],"adversarial":["FX-ADV-003"],"integration":["FX-INT-006"]},
+    {"rule_id":"RCI-ANOM-001","positive":["FX-CLEAN-002"],"negative":["FX-NEG-004","FX-NEG-007"],"adversarial":["FX-ADV-001","FX-ADV-002","FX-ADV-007","FX-ADV-008"],"integration":["FX-INT-003"]},
+    {"rule_id":"RCI-ANOM-002","positive":["FX-CLEAN-001"],"negative":["FX-NEG-010"],"adversarial":["FX-ADV-003"],"integration":["FX-INT-004"]},
+    {"rule_id":"RCI-META-001","positive":["FX-CLEAN-001","FX-NEG-006"],"negative":["FX-NEG-003"],"adversarial":["FX-ADV-004"],"integration":["FX-INT-003"]},
+    {"rule_id":"RCI-META-002","positive":["FX-CLEAN-006"],"negative":["FX-NEG-009"],"adversarial":["FX-ADV-006"],"integration":["FX-INT-004"]},
+    {"rule_id":"RCI-URL-001","positive":["FX-CLEAN-001","FX-NEG-005"],"negative":["FX-CLEAN-005"],"adversarial":["FX-ADV-009"],"integration":["FX-INT-003"]},
+    {"rule_id":"RCI-QUOTE-001","positive":["FX-NEG-007"],"negative":["FX-CLEAN-001"],"adversarial":["FX-ADV-010"],"integration":["FX-INT-008"]},
+    {"rule_id":"RCI-EXC-001","positive":["FX-CLEAN-004","FX-NEG-001","FX-NEG-002"],"negative":["FX-CLEAN-001"],"adversarial":["FX-ADV-005"],"integration":["FX-INT-007"]},
+    {"rule_id":"RCI-EVID-001","positive":["FX-CLEAN-001","FX-NEG-003"],"negative":["FX-CLEAN-002"],"adversarial":["FX-ADV-006"],"integration":["FX-INT-007"]},
+    {"rule_id":"RCI-ESC-001","positive":["FX-NEG-004"],"negative":["FX-CLEAN-001"],"adversarial":["FX-ADV-001","FX-ADV-012"],"integration":["FX-INT-003"]},
+    {"rule_id":"RCI-QA-001","positive":["FX-INT-001"],"negative":["FX-CLEAN-001"],"adversarial":["FX-ADV-012"],"integration":["FX-INT-006","FX-INT-007"]},
+    {"rule_id":"RCI-CONFLICT-001","positive":["FX-CLEAN-001"],"negative":["FX-NEG-003"],"adversarial":["FX-ADV-012"],"integration":["FX-INT-006"]}
+  ]
+}
+

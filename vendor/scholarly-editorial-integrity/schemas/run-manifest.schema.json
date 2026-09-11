@@ -1,0 +1,24 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://mwm.local/schemas/sei/run-manifest.schema.json",
+  "title":"MWM SEI Run Manifest",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["run_id","chapter_id","chapter_version","stage","trigger","governing_rule_versions","citation_graph_status","confidentiality_policy","source_access_log","case_owner","tool_policy","prior_run_id"],
+  "properties":{
+    "run_id":{"type":"string","pattern":"^MWM-SEI-[A-Za-z0-9._-]+$"},
+    "chapter_id":{"type":"string","minLength":1},
+    "chapter_version":{"type":"string","minLength":1},
+    "stage":{"type":"string","enum":["intake","review","response","production","release","post_publication"]},
+    "trigger":{"type":"string","enum":["intake_baseline","citation_review_complete","editor_concern","author_response","status_change","contributor_change","ai_event","pre_release","post_publication_update"]},
+    "governing_rule_versions":{"type":"array","minItems":1,"items":{"type":"string"}},
+    "citation_graph_status":{"type":"string","enum":["complete","partial","unresolved"]},
+    "confidentiality_policy":{"type":"string","minLength":1},
+    "source_access_log":{"type":"string","minLength":1},
+    "case_owner":{"type":["string","null"]},
+    "tool_policy":{"type":"string","minLength":1},
+    "prior_run_id":{"type":["string","null"]},
+    "chapter_profile":{"type":["string","null"]},
+    "manuscript_file":{"type":["string","null"]}
+  }
+}

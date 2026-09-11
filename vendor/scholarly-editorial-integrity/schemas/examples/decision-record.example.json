@@ -1,0 +1,14 @@
+{
+  "decision_id":"DEC-SEI-example-001",
+  "finding_ids":["SEI-example-001"],
+  "decision":"qualify",
+  "decision_owner":"MWM editorial authority",
+  "authority":"MWM decision log — pending confirmation",
+  "evidence_considered":["SEI-example-001","SRC-003 p.4"],
+  "response_summary":"No author response recorded in this example.",
+  "rationale":"A narrower claim preserves the source scope and avoids silently strengthening causality.",
+  "release_effect":"track",
+  "approved_at":"2026-08-13",
+  "supersedes":null,
+  "next_review_trigger":"author response"
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mwm.local/schemas/rci/source-record.schema.json",
+  "title": "MWM RCI Normalized Source Record",
+  "$defs": {
+    "identifier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "raw", "normalized", "status"],
+      "properties": {
+        "type": {"type": "string", "enum": ["DOI", "URL", "ORCID", "accession", "repository", "other"]},
+        "raw": {"type": ["string", "null"]},
+        "normalized": {"type": ["string", "null"]},
+        "status": {"type": "string", "enum": ["not_present", "malformed", "normalized", "resolves_match", "resolves_mismatch", "does_not_resolve", "temporarily_unavailable", "inaccessible", "ambiguous", "not_applicable"]}
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "source_id", "retrieved_at", "relevance"],
+      "properties": {
+        "evidence_id": {"type": "string"},
+        "source_id": {"type": "string"},
+        "retrieved_at": {"type": ["string", "null"]},
+        "relevance": {"type": "string"},
+        "observed_value": {},
+        "verified_value": {}
+      }
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["source_record_id", "source_type", "raw_reference", "identity", "identifiers", "metadata_evidence", "relations", "rendered_reference", "rendering", "verification_status"],
+  "properties": {
+    "source_record_id": {"type": "string", "pattern": "^R[0-9]{3,}$"},
+    "source_type": {"type": "string"},
+    "raw_reference": {"type": "string"},
+    "identity": {
+      "type": "object",
+      "required": ["creators", "title", "date"],
+      "properties": {
+        "creators": {"type": "array", "items": {"type": "string"}},
+        "group_author": {"type": ["string", "null"]},
+        "title": {"type": ["string", "null"]},
+        "container_title": {"type": ["string", "null"]},
+        "date": {"type": ["string", "null"]},
+        "version": {"type": ["string", "null"]},
+        "edition": {"type": ["string", "null"]}
+      }
+    },
+    "identifiers": {"type": "array", "items": {"$ref": "#/$defs/identifier"}},
+    "metadata_evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}},
+    "relations": {"type": "array", "items": {"type": "object", "required": ["relation_type", "target_source_record_id", "evidence_ids"], "properties": {"relation_type": {"type": "string"}, "target_source_record_id": {"type": "string"}, "evidence_ids": {"type": "array", "items": {"type": "string"}}}}},
+    "rendered_reference": {"type": ["string", "null"]},
+    "rendering": {"type": "object", "required": ["rule_package", "renderer", "renderer_version", "exceptions"], "properties": {"rule_package": {"type": "string"}, "renderer": {"type": "string"}, "renderer_version": {"type": "string"}, "style_id": {"type": ["string", "null"]}, "exceptions": {"type": "array", "items": {"type": "string"}}}},
+    "verification_status": {"type": "string", "enum": ["verified", "partial", "ambiguous", "blocked"]}
+  }
+}

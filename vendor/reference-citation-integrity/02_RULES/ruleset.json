@@ -1,0 +1,255 @@
+{
+  "rule_set_id": "MWM-RCI-RULES",
+  "version": "0.1.0",
+  "status": "draft-for-editorial-review",
+  "specification_id": "MWM-RCI-SPEC",
+  "specification_version": "0.1.0-draft",
+  "effective_date": "2026-08-13",
+  "authority_order": [
+    {"level": 1, "name": "mwm_project_authority", "may_override": [2, 3, 4, 5, 6]},
+    {"level": 2, "name": "adopted_mwm_apa_rule_package", "may_override": [3, 4, 5, 6]},
+    {"level": 3, "name": "approved_mwm_house_exception", "may_override": [4, 5, 6]},
+    {"level": 4, "name": "source_identity_and_metadata_standards", "may_override": [5, 6]},
+    {"level": 5, "name": "rendering_and_provider_implementation", "may_override": [6]},
+    {"level": 6, "name": "model_inference", "may_override": []}
+  ],
+  "conflict_behavior": {
+    "same_level_conflict_rule_id": "RCI-CONFLICT-001",
+    "higher_level_wins": true,
+    "required_action": "ESCALATE",
+    "required_record": "decision_record"
+  },
+  "action_vocabulary": ["AUTO_FIX", "SUGGEST", "FLAG", "ESCALATE", "BLOCK", "CLOSE"],
+  "status_vocabulary": ["verified", "informational", "needs_review", "blocked", "not_applicable", "not_checked"],
+  "confidence_bands": [
+    {"name": "high", "minimum": 0.95, "maximum": 1.0, "allowed_actions": ["AUTO_FIX", "CLOSE", "SUGGEST"]},
+    {"name": "strong", "minimum": 0.8, "maximum": 0.94, "allowed_actions": ["SUGGEST", "FLAG", "ESCALATE"]},
+    {"name": "moderate", "minimum": 0.6, "maximum": 0.79, "allowed_actions": ["FLAG", "ESCALATE"]},
+    {"name": "low", "minimum": 0.0, "maximum": 0.59, "allowed_actions": ["ESCALATE", "BLOCK"]}
+  ],
+  "rules": [
+    {
+      "id": "RCI-AUTH-001",
+      "family": "authority",
+      "statement": "MWM project requirements control project-specific citation and reference decisions.",
+      "applies_to": ["all"],
+      "evidence_required": ["active_project_profile", "decision_log_when_exception"],
+      "default_action": "ESCALATE",
+      "auto_fixable": false,
+      "fixture_classes": ["authority", "conflict"]
+    },
+    {
+      "id": "RCI-AUTH-002",
+      "family": "authority",
+      "statement": "The active adopted MWM/APA rule package controls ordinary in-text and reference-list presentation.",
+      "applies_to": ["RCI-04", "RCI-06"],
+      "evidence_required": ["rule_package_id", "rule_package_version"],
+      "default_action": "BLOCK",
+      "auto_fixable": false,
+      "fixture_classes": ["clean", "formatting", "conflict"]
+    },
+    {
+      "id": "RCI-REC-001",
+      "family": "reconciliation",
+      "statement": "Every in-scope retrievable citation must resolve to the intended reference record unless an approved exception exists.",
+      "applies_to": ["RCI-01", "RCI-02"],
+      "evidence_required": ["citation_record", "reference_record_or_exception"],
+      "default_action": "BLOCK",
+      "auto_fixable": false,
+      "fixture_classes": ["clean", "missing_reference", "ambiguous_match", "non_body_context"]
+    },
+    {
+      "id": "RCI-REC-002",
+      "family": "reconciliation",
+      "statement": "Every reference must be cited somewhere in the defined citation scope unless an approved exception exists.",
+      "applies_to": ["RCI-01", "RCI-02"],
+      "evidence_required": ["reference_record", "coverage_inventory", "exception_record_when_applicable"],
+      "default_action": "BLOCK",
+      "auto_fixable": false,
+      "fixture_classes": ["clean", "orphan_reference", "coverage_gap", "exception"]
+    },
+    {
+      "id": "RCI-COV-001",
+      "family": "coverage",
+      "statement": "Tables, captions, notes, appendices, and supplementary material are in scope when the run manifest includes them.",
+      "applies_to": ["RCI-01", "RCI-02", "RCI-07"],
+      "evidence_required": ["parser_coverage_record", "structured_locator_inventory"],
+      "default_action": "FLAG",
+      "auto_fixable": false,
+      "fixture_classes": ["non_body_context", "parser_gap", "negative_control"]
+    },
+    {
+      "id": "RCI-ID-001",
+      "family": "identity",
+      "statement": "Source identity must be established before automatic reference construction.",
+      "applies_to": ["RCI-03", "RCI-04"],
+      "evidence_required": ["source_record", "identity_evidence"],
+      "default_action": "ESCALATE",
+      "auto_fixable": false,
+      "fixture_classes": ["clean", "identity_conflict", "source_type_ambiguity"]
+    },
+    {
+      "id": "RCI-ID-002",
+      "family": "identity",
+      "statement": "Provider metadata is preserved as evidence with provider identity and retrieval information.",
+      "applies_to": ["RCI-03", "RCI-05"],
+      "evidence_required": ["provider_name", "retrieved_at", "source_locator", "observed_value"],
+      "default_action": "FLAG",
+      "auto_fixable": false,
+      "fixture_classes": ["provider_candidate", "metadata_provenance", "negative_control"]
+    },
+    {
+      "id": "RCI-ID-003",
+      "family": "identity",
+      "statement": "A resolving DOI is not sufficient evidence of a correct bibliographic match.",
+      "applies_to": ["RCI-03", "RCI-05", "RCI-07"],
+      "evidence_required": ["identifier_resolution", "field_level_identity_comparison"],
+      "default_action": "ESCALATE",
+      "auto_fixable": false,
+      "fixture_classes": ["doi_mismatch", "adversarial", "zero_tolerance"]
+    },
+    {
+      "id": "RCI-TYPE-001",
+      "family": "source_typing",
+      "statement": "Source type is explicit for datasets, software, preprints, reports, chapters, and other non-article objects.",
+      "applies_to": ["RCI-03", "RCI-04", "RCI-07"],
+      "evidence_required": ["source_artifact_or_authoritative_metadata", "source_type_taxonomy"],
+      "default_action": "ESCALATE",
+      "auto_fixable": false,
+      "fixture_classes": ["dataset", "software", "preprint", "report", "chapter", "source_type_ambiguity"]
+    },
+    {
+      "id": "RCI-FMT-001",
+      "family": "rendering",
+      "statement": "Rendered output uses a pinned MWM/APA rule package and renderer configuration.",
+      "applies_to": ["RCI-04", "RCI-06"],
+      "evidence_required": ["rule_package_version", "renderer_name", "renderer_version", "style_id"],
+      "default_action": "BLOCK",
+      "auto_fixable": false,
+      "fixture_classes": ["clean", "renderer_regression", "configuration_missing"]
+    },
+    {
+      "id": "RCI-FMT-002",
+      "family": "identifier_display",
+      "statement": "DOI display normalization must not change the underlying identifier.",
+      "applies_to": ["RCI-05", "RCI-06"],
+      "evidence_required": ["raw_identifier", "normalized_identifier", "normalization_trace"],
+      "default_action": "SUGGEST",
+      "auto_fixable": false,
+      "decision_hook": "RCI-DH-006",
+      "fixture_classes": ["doi_normalization", "negative_control", "safe_transform"]
+    },
+    {
+      "id": "RCI-ANOM-001",
+      "family": "anomaly",
+      "statement": "Similarity is not identity; related works must not be merged without evidence and approval.",
+      "applies_to": ["RCI-01", "RCI-03", "RCI-07"],
+      "evidence_required": ["candidate_records", "relation_evidence", "decision_record_when_merge_or_split"],
+      "default_action": "ESCALATE",
+      "auto_fixable": false,
+      "fixture_classes": ["preprint_article", "related_work", "duplicate_candidate", "adversarial", "zero_tolerance"]
+    },
+    {
+      "id": "RCI-ANOM-002",
+      "family": "anomaly",
+      "statement": "A missing required persistent identifier is a release blocker when MWM expressly requires it.",
+      "applies_to": ["RCI-03", "RCI-05", "RCI-07"],
+      "evidence_required": ["active_project_rule", "source_record", "identifier_inventory"],
+      "default_action": "BLOCK",
+      "auto_fixable": false,
+      "decision_hook": "RCI-DH-002",
+      "fixture_classes": ["dataset_missing_identifier", "software_missing_identifier", "release_blocker"]
+    },
+    {
+      "id": "RCI-META-001",
+      "family": "metadata",
+      "statement": "Material metadata is compared field by field across manuscript, source of record, and candidate providers.",
+      "applies_to": ["RCI-03"],
+      "evidence_required": ["observed_value", "verified_value_or_gap", "source_of_record", "comparison_trace"],
+      "default_action": "FLAG",
+      "auto_fixable": false,
+      "fixture_classes": ["metadata_mismatch", "partial_verification", "provider_candidate"]
+    },
+    {
+      "id": "RCI-META-002",
+      "family": "metadata",
+      "statement": "Missing material metadata is represented as unknown or not supplied; it is not filled from model memory.",
+      "applies_to": ["RCI-03", "RCI-04"],
+      "evidence_required": ["field_gap", "search_scope", "uncertainty_note"],
+      "default_action": "ESCALATE",
+      "auto_fixable": false,
+      "fixture_classes": ["missing_metadata", "adversarial", "negative_control"]
+    },
+    {
+      "id": "RCI-URL-001",
+      "family": "identifier",
+      "statement": "URL syntax, reachability, and attachment to the intended source are separate statuses.",
+      "applies_to": ["RCI-05"],
+      "evidence_required": ["raw_url", "syntax_check", "access_check", "attachment_comparison"],
+      "default_action": "FLAG",
+      "auto_fixable": false,
+      "fixture_classes": ["url_only", "url_inaccessible", "url_mismatch", "negative_control"]
+    },
+    {
+      "id": "RCI-QUOTE-001",
+      "family": "citation_formatting",
+      "statement": "A direct quotation is checked for the required locator under the active MWM/APA profile.",
+      "applies_to": ["RCI-06"],
+      "evidence_required": ["quotation_detection", "citation_record", "active_rule"],
+      "default_action": "SUGGEST",
+      "auto_fixable": false,
+      "decision_hook": "RCI-DH-007",
+      "fixture_classes": ["quotation_locator", "negative_control"]
+    },
+    {
+      "id": "RCI-EXC-001",
+      "family": "exceptions",
+      "statement": "An exception changes the normal check only when it is scoped, approved, versioned, and attached to the affected record.",
+      "applies_to": ["all"],
+      "evidence_required": ["exception_id", "scope", "approval", "effective_version"],
+      "default_action": "ESCALATE",
+      "auto_fixable": false,
+      "fixture_classes": ["exception", "authority", "negative_control"]
+    },
+    {
+      "id": "RCI-EVID-001",
+      "family": "evidence",
+      "statement": "Every material finding must be reproducible from a location, observed value, rule, evidence, action, confidence, and disposition.",
+      "applies_to": ["all"],
+      "evidence_required": ["finding_record", "evidence_record"],
+      "default_action": "BLOCK",
+      "auto_fixable": false,
+      "fixture_classes": ["output_integrity", "negative_control"]
+    },
+    {
+      "id": "RCI-ESC-001",
+      "family": "escalation",
+      "statement": "Identity ambiguity, material source conflicts, related-work choices, rule conflicts, and substantive claim judgments require human escalation.",
+      "applies_to": ["all"],
+      "evidence_required": ["alternatives", "evidence_collected", "decision_requested", "consequences"],
+      "default_action": "ESCALATE",
+      "auto_fixable": false,
+      "fixture_classes": ["adversarial", "ambiguous", "zero_tolerance"]
+    },
+    {
+      "id": "RCI-QA-001",
+      "family": "quality_assurance",
+      "statement": "Every release runs clean controls, error cases, edge cases, and regressions with the rule and renderer versions recorded.",
+      "applies_to": ["release"],
+      "evidence_required": ["evaluation_set_id", "scorer_result", "renderer_version", "regression_result"],
+      "default_action": "BLOCK",
+      "auto_fixable": false,
+      "fixture_classes": ["integration", "release_gate"]
+    },
+    {
+      "id": "RCI-CONFLICT-001",
+      "family": "authority_conflict",
+      "statement": "When two rules at the same authority level conflict, preserve both claims, identify the conflict, and escalate rather than choosing silently.",
+      "applies_to": ["all"],
+      "evidence_required": ["rule_ids", "authority_levels", "conflict_description", "decision_record"],
+      "default_action": "ESCALATE",
+      "auto_fixable": false,
+      "fixture_classes": ["authority_conflict", "adversarial"]
+    }
+  ]
+}

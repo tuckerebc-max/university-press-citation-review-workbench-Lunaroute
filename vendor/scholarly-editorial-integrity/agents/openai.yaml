@@ -1,0 +1,7 @@
+interface:
+  display_name: "Scholarly/Editorial Integrity"
+  short_description: "Evidence-first integrity review"
+  default_prompt: "Use $scholarly-editorial-integrity to preserve evidence, route integrity signals, and protect against unsupported allegations."
+
+policy:
+  allow_implicit_invocation: true

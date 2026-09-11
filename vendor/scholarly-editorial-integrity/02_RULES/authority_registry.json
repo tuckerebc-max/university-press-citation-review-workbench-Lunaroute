@@ -1,0 +1,13 @@
+{
+  "registry_id":"MWM-SEI-AUTHORITY",
+  "version":"0.1.0",
+  "tiers":[
+    {"tier":1,"id":"mwm_project_instructions_and_decisions","status":"controlling"},
+    {"tier":2,"id":"mwm_decision_log_metadata_declarations_responses","status":"controlling_local_facts"},
+    {"tier":3,"id":"explicitly_delegated_policy","status":"controlling_only_when_delegated"},
+    {"tier":4,"id":"professional_framework","status":"process_reference"},
+    {"tier":5,"id":"primary_source","status":"content_authority_for_what_source_says"},
+    {"tier":6,"id":"reference_or_model_inference","status":"question_generation_only"}
+  ],
+  "formal_allegation_boundary":"No formal misconduct, plagiarism, fabrication, falsification, authorship entitlement, conflict, legal, ethics, or institutional conclusion without authorized human record."
+}

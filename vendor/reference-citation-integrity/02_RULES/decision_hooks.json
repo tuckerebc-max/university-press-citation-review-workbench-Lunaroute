@@ -1,0 +1,116 @@
+{
+  "decision_register_id": "MWM-RCI-DECISIONS",
+  "version": "0.1.0",
+  "status": "open-decisions-preserved",
+  "specification_id": "MWM-RCI-SPEC",
+  "principle": "An unresolved MWM policy is a configuration hook, not a model default.",
+  "runtime_defaults": {
+    "unresolved_policy": "do_not_invent",
+    "material_identity_change": "ESCALATE",
+    "unknown_required_policy": "not_ready",
+    "provider_metadata": "candidate_evidence_only",
+    "automatic_identity_change": false,
+    "automatic_deletion_merge_substitution": false
+  },
+  "hooks": [
+    {
+      "id": "RCI-DH-001",
+      "name": "apa_edge_case_adoption",
+      "status": "unresolved",
+      "question": "Which APA edge cases does MWM adopt when chapter guidance is silent?",
+      "allowed_values": ["explicit_rule_package_reference"],
+      "default_behavior": "ESCALATE affected record; do not claim APA certainty",
+      "required_for": ["RCI-04", "RCI-06"],
+      "decision_owner": "MWM editorial adjudication",
+      "records_required": ["decision_log_id", "rule_id", "effective_version", "regression_fixture_ids"]
+    },
+    {
+      "id": "RCI-DH-002",
+      "name": "dataset_persistent_identifier_fallbacks",
+      "status": "unresolved",
+      "question": "Which persistent-identifier fallbacks satisfy MWM for datasets?",
+      "allowed_values": ["explicit_project_policy_value"],
+      "default_behavior": "BLOCK or ESCALATE when a required dataset identifier is absent; never infer an identifier",
+      "required_for": ["RCI-03", "RCI-05", "RCI-07"],
+      "decision_owner": "MWM editorial adjudication",
+      "records_required": ["decision_log_id", "accepted_identifier_types", "effective_version", "regression_fixture_ids"]
+    },
+    {
+      "id": "RCI-DH-003",
+      "name": "metadata_source_of_record",
+      "status": "unresolved",
+      "question": "Which source wins when official source material and providers disagree on a material field?",
+      "allowed_values": ["explicit_project_hierarchy"],
+      "default_behavior": "Preserve competing values and ESCALATE; provider data cannot silently win",
+      "required_for": ["RCI-03", "RCI-05"],
+      "decision_owner": "MWM editorial adjudication",
+      "records_required": ["decision_log_id", "source_hierarchy", "effective_version", "regression_fixture_ids"]
+    },
+    {
+      "id": "RCI-DH-004",
+      "name": "access_date_policy",
+      "status": "unresolved",
+      "question": "When are retrieval/access dates required for web sources?",
+      "allowed_values": ["explicit_project_policy_value"],
+      "default_behavior": "Do not add or remove an access date automatically; FLAG or ESCALATE affected records",
+      "required_for": ["RCI-04", "RCI-06"],
+      "decision_owner": "MWM editorial adjudication",
+      "records_required": ["decision_log_id", "scope", "effective_version", "regression_fixture_ids"]
+    },
+    {
+      "id": "RCI-DH-005",
+      "name": "source_relation_representation",
+      "status": "unresolved",
+      "question": "How should versions, corrections, translations, preprints, and related works be represented in the exchange format?",
+      "allowed_values": ["explicit_project_intermediate_schema"],
+      "default_behavior": "Preserve distinct source records and typed relations; do not merge",
+      "required_for": ["RCI-01", "RCI-03", "RCI-07"],
+      "decision_owner": "MWM editorial adjudication",
+      "records_required": ["decision_log_id", "relation_vocabulary", "effective_version", "regression_fixture_ids"]
+    },
+    {
+      "id": "RCI-DH-006",
+      "name": "auto_fix_whitelist",
+      "status": "unresolved",
+      "question": "Which deterministic, reversible, identity-preserving transformations may be applied automatically?",
+      "allowed_values": ["explicit_project_whitelist"],
+      "default_behavior": "AUTO_FIX is disabled unless the active run profile enables the named transform; otherwise SUGGEST or FLAG",
+      "required_for": ["RCI-04", "RCI-05", "RCI-06"],
+      "decision_owner": "MWM editorial adjudication",
+      "records_required": ["decision_log_id", "transform_ids", "effective_version", "regression_fixture_ids"]
+    },
+    {
+      "id": "RCI-DH-007",
+      "name": "notes_and_endnotes_scope",
+      "status": "unresolved",
+      "question": "How are notes and endnotes treated across manuscript types?",
+      "allowed_values": ["explicit_manuscript_type_profile"],
+      "default_behavior": "Require scope in the run manifest; if omitted, return partial coverage and not_ready for release",
+      "required_for": ["RCI-01", "RCI-02", "RCI-06"],
+      "decision_owner": "MWM editorial adjudication",
+      "records_required": ["decision_log_id", "manuscript_type", "scope", "effective_version", "regression_fixture_ids"]
+    },
+    {
+      "id": "RCI-DH-008",
+      "name": "software_reference_policy",
+      "status": "unresolved",
+      "question": "Which software release, version, creator, and identifier fields are required by MWM?",
+      "allowed_values": ["explicit_project_policy_value"],
+      "default_behavior": "Preserve software identity uncertainty and ESCALATE when version or identifier is material and missing",
+      "required_for": ["RCI-03", "RCI-04", "RCI-07"],
+      "decision_owner": "MWM editorial adjudication",
+      "records_required": ["decision_log_id", "required_fields", "effective_version", "regression_fixture_ids"]
+    },
+    {
+      "id": "RCI-DH-009",
+      "name": "provider_match_threshold",
+      "status": "unresolved",
+      "question": "What evidence threshold permits accepting a probable Crossref/DataCite or other provider match?",
+      "allowed_values": ["explicit_field_level_threshold"],
+      "default_behavior": "Provider match remains a candidate; no material correction or closure without decisive evidence",
+      "required_for": ["RCI-03", "RCI-05"],
+      "decision_owner": "MWM editorial adjudication",
+      "records_required": ["decision_log_id", "required_matching_fields", "effective_version", "regression_fixture_ids"]
+    }
+  ]
+}

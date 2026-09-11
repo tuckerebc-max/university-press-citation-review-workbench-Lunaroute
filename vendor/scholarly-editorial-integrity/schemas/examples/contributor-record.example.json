@@ -1,0 +1,10 @@
+{
+  "record_id":"CONTRIB-example-001",
+  "byline":["Author A","Author B"],
+  "contributions":[{"person":"Author A","role":"conceptualization"},{"person":"Author B","role":"analysis"}],
+  "affiliations":["Organization A","Organization B"],
+  "acknowledgments":[],
+  "agreement_status":"partial",
+  "owner":"author group",
+  "evidence":["MWM-CONTRIBUTOR-RECORD-UNSET"]
+}

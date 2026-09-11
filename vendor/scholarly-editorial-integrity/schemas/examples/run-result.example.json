@@ -1,0 +1,20 @@
+{
+  "run_id":"MWM-SEI-example-001",
+  "specification_id":"MWM-SEI-SPEC",
+  "specification_version":"0.1.0-draft",
+  "chapter_id":"MWM-CH-EXAMPLE",
+  "chapter_version":"draft-01",
+  "stage":"review",
+  "trigger":"intake_baseline",
+  "preconditions":"partial",
+  "summary":{"claims_reviewed":1,"quotations_reviewed":0,"sources_reviewed":1,"open_findings":1,"resolved_findings":0,"high_critical_findings":1,"source_unavailable_findings":0,"referred_cases":0,"confidentiality_incidents":0},
+  "release_status":"not_ready",
+  "findings":[],
+  "decisions":[],
+  "source_access_records":[],
+  "disclosure_records":[],
+  "contributor_records":[],
+  "ai_events":[],
+  "handoff_dependencies":[{"owner_family":"Editorial QA & Orchestration","dependency_type":"release_hold","finding_ids":["SEI-example-001"],"status":"open"}],
+  "ledger_id":"SEI-LEDGER-example-001"
+}

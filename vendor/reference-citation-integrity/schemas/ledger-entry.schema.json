@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mwm.local/schemas/rci/ledger-entry.schema.json",
+  "title": "MWM RCI Citation Reference Ledger Entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["ledger_entry_id", "source_record_id", "citation_ids", "reference_ids", "relationship_status", "match_method", "confidence", "evidence_ids"],
+  "properties": {
+    "ledger_entry_id": {"type": "string", "pattern": "^L[0-9]{3,}$"},
+    "source_record_id": {"type": "string", "pattern": "^R[0-9]{3,}$"},
+    "citation_ids": {"type": "array", "items": {"type": "string", "pattern": "^C[0-9]{3,}$"}},
+    "reference_ids": {"type": "array", "items": {"type": "string", "pattern": "^R[0-9]{3,}$"}},
+    "relationship_status": {"type": "string", "enum": ["matched", "missing_reference", "orphan_reference", "ambiguous_match", "metadata_mismatch", "expected_no_reference", "not_checked"]},
+    "match_method": {"type": "string", "enum": ["stable_identifier", "exact_author_year", "author_year_title", "provider_candidate", "exception", "none"]},
+    "candidate_source_record_ids": {"type": "array", "items": {"type": "string", "pattern": "^R[0-9]{3,}$"}},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "evidence_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "exception_id": {"type": ["string", "null"]},
+    "decision_log_id": {"type": ["string", "null"]}
+  }
+}

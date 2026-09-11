@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mwm.local/schemas/rci/reference-record.schema.json",
+  "title": "MWM RCI Normalized Reference Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["reference_id", "raw_text", "location", "source_type", "authors_or_group", "date", "title", "parse_confidence"],
+  "properties": {
+    "reference_id": {"type": "string", "pattern": "^R[0-9]{3,}$"},
+    "raw_text": {"type": "string", "minLength": 1},
+    "location": {"type": "string", "minLength": 1},
+    "source_type": {"type": "string", "enum": ["journal_article", "book", "edited_book_chapter", "report_or_working_paper", "conference_item", "dissertation_or_thesis", "web_page", "dataset", "software_release", "preprint", "audiovisual_or_other", "unknown_or_ambiguous"]},
+    "authors_or_group": {"type": "array", "items": {"type": "string"}},
+    "date": {"type": ["string", "null"]},
+    "title": {"type": ["string", "null"]},
+    "container_title": {"type": ["string", "null"]},
+    "version": {"type": ["string", "null"]},
+    "edition": {"type": ["string", "null"]},
+    "identifiers": {"type": "array", "items": {"$ref": "source-record.schema.json#/$defs/identifier"}},
+    "metadata_provenance": {"type": "array", "items": {"$ref": "source-record.schema.json#/$defs/evidence"}},
+    "parse_confidence": {"type": "number", "minimum": 0, "maximum": 1}
+  }
+}

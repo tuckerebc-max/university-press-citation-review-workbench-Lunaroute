@@ -1,0 +1,9 @@
+{
+  "policy_id": "MWM-RCI-REGRESSION-POLICY",
+  "version": "0.1.0",
+  "intake_order": ["preserve_artifacts", "contain_release_impact", "reproduce", "classify_failure", "minimize_fixture", "assign_gold_judgment", "update_rule_or_skill_if_needed", "rerun_suite", "record_release"],
+  "required_artifacts": ["input_manuscript_or_managed_identifier", "run_manifest", "run_result", "source_evidence_when_applicable", "decision_log_when_applicable"],
+  "zero_tolerance_classes": ["invented_identifier", "invented_locator", "silent_source_substitution", "silent_merge_or_delete", "false_release_pass", "false_claim_support_judgment"],
+  "release_requirements": ["new_behavior_has_fixture", "changed_rule_has_crosswalk_row", "changed_schema_has_validated_examples", "scorer_passes_clean_controls", "changelog_entry_present"],
+  "production_failure_note": "This package ships capture mechanisms only; absence of records does not imply absence of production failures."
+}

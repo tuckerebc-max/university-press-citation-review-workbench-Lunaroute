@@ -1,0 +1,14 @@
+{
+  "integration_set_id":"MWM-SEI-INTEGRATION-01",
+  "version":"0.1.0",
+  "cases":[
+    {"fixture_id":"FX-INT-001","sequence":["load_manifest","inventory_claims_sources_disclosures","check_access","run_comparisons","decision_log","release_gate"],"assertions":["no open high/critical case","release_status=ready"]},
+    {"fixture_id":"FX-INT-002","sequence":["claim_source_fit","centrality_assessment","author_query","release_hold"],"assertions":["scope mismatch remains visible","release_status=not_ready"]},
+    {"fixture_id":"FX-INT-003","sequence":["status_lookup","preserve_version_lineage","assess_effect","decision_log","release_gate"],"assertions":["status is date-stamped","prior evidence retained","release_status=not_ready"]},
+    {"fixture_id":"FX-INT-004","sequence":["compare_contributor_records","preserve_dispute","route_author_group_or_institution","release_hold"],"assertions":["no authorship arbitration","release_status=not_ready"]},
+    {"fixture_id":"FX-INT-005","sequence":["load_disclosure_matrix","check_fields","record_not_applicable_rationale","release_gate"],"assertions":["disclosures complete","release_status=ready"]},
+    {"fixture_id":"FX-INT-006","sequence":["classify_protected_material","stop_processing","preserve_incident_evidence","notify_security","release_block"],"assertions":["confidentiality incident escalates","release_status=not_ready"]},
+    {"fixture_id":"FX-INT-007","sequence":["preserve_original_finding","record_response","reassess_evidence","create_decision"],"assertions":["response does not erase evidence","release_status=ready_with_conditions"]},
+    {"fixture_id":"FX-INT-008","sequence":["validate_report","validate_evidence","summarize_open_cases","release_gate"],"assertions":["unresolved high-risk case remains visible","release_status=not_ready"]}
+  ]
+}

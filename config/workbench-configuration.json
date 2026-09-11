@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "workbench_id": "UNIVERSITY-PRESS-CITATION-REVIEW-0.1",
+  "status": "bounded_preview_pilot",
+  "planning_model": "policy_bound",
+  "required_stage_order": [
+    "source_manifest",
+    "reference-citation-integrity",
+    "scholarly-editorial-integrity",
+    "author_packet",
+    "human_acceptance"
+  ],
+  "fixed_gates": [
+    "source hash and immutable manifest",
+    "per-run external-provider approval bound to the manifest",
+    "version-pinned skill packages",
+    "strict structured model output",
+    "no source-unavailable finding represented as verified",
+    "neutral signal language",
+    "source hash reconciliation before completion"
+  ],
+  "adaptive_ranges": {
+    "model": [
+      "glm-5.3-background",
+      "glm-5.3",
+      "glm-5.3-flash-background",
+      "glm-5.3-flash"
+    ],
+    "parallel_chapters": {
+      "minimum": 1,
+      "maximum": 6,
+      "default": 3
+    },
+    "optional_checks": [
+      "Crossref candidate DOI metadata lookup"
+    ]
+  },
+  "outputs": [
+    "immutable plan",
+    "source manifest",
+    "run receipt",
+    "author-review chapter copy",
+    "author query sheet",
+    "HTML review",
+    "RCI and SEI run results",
+    "citation inventory",
+    "append-only observations"
+  ],
+  "automatic_text_changes": false,
+  "publication_authority": false
+}

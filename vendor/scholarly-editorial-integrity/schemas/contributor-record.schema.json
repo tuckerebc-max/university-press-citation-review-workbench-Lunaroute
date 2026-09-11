@@ -1,0 +1,18 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://mwm.local/schemas/sei/contributor-record.schema.json",
+  "title":"MWM SEI Contributor Record",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["record_id","byline","contributions","affiliations","acknowledgments","agreement_status","owner"],
+  "properties":{
+    "record_id":{"type":"string","pattern":"^CONTRIB-[A-Za-z0-9._-]+$"},
+    "byline":{"type":"array","items":{"type":"string"}},
+    "contributions":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["person","role"],"properties":{"person":{"type":"string"},"role":{"type":"string"}}}},
+    "affiliations":{"type":"array","items":{"type":"string"}},
+    "acknowledgments":{"type":"array","items":{"type":"string"}},
+    "agreement_status":{"type":"string","enum":["complete","partial","disputed","not_checked","not_applicable"]},
+    "owner":{"type":"string"},
+    "evidence":{"type":"array","items":{"type":"string"}}
+  }
+}

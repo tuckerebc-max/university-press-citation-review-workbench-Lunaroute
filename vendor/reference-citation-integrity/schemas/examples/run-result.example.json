@@ -1,0 +1,21 @@
+{
+  "run_id": "MWM-RCI-chapter-20260813-01",
+  "specification_id": "MWM-RCI-SPEC",
+  "specification_version": "0.1.0-draft",
+  "manuscript_version": "author-v3",
+  "project_profile": "MWM-APA7-v0.1",
+  "run_mode": "full",
+  "started_at": "2026-08-13T12:00:00Z",
+  "completed_at": "2026-08-13T12:01:00Z",
+  "preconditions": "pass",
+  "parser_coverage": "high",
+  "summary": {"citations_found": 2, "references_found": 1, "confirmed_links": 2, "unresolved_links": 0, "findings_total": 0, "blocking_findings": 0, "escalations": 0},
+  "release_status": "ready",
+  "rule_package_version": "MWM-APA7-v0.1",
+  "renderer": {"name": "pinned-equivalent", "version": "0.1.0", "style_id": "mwm-apa7"},
+  "evaluation_set": "MWM-RCI-EVAL-01",
+  "findings": [],
+  "source_records": [],
+  "ledger_entries": [],
+  "decision_records": []
+}

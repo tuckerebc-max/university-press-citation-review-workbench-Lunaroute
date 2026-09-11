@@ -1,0 +1,11 @@
+{
+  "disclosure_id":"DISC-example-001",
+  "field":"competing_interests",
+  "applicability":"unknown",
+  "status":"unknown",
+  "text_or_locator":null,
+  "evidence":["MWM-DISCLOSURE-MATRIX-UNSET"],
+  "owner":"MWM editorial authority",
+  "response_id":null,
+  "decision_id":null
+}
