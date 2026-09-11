@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mwm.local/schemas/rci/production-failure.schema.json",
+  "title": "MWM RCI Production Failure Capture",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["production_failure_id", "capture_status", "discovered_at", "stage", "artifact", "symptom", "impact", "evidence", "current_disposition"],
+  "properties": {
+    "production_failure_id": {"type": "string", "pattern": "^PFAIL-RCI-[A-Za-z0-9._-]+$"},
+    "capture_status": {"type": "string", "enum": ["new", "contained", "under_review", "regression_seeded", "resolved", "closed"]},
+    "discovered_at": {"type": "string", "format": "date-time"},
+    "stage": {"type": "string", "enum": ["author_revision", "copyedit_close", "production_handoff", "typesetting", "proof", "post_publication"]},
+    "artifact": {"type": "object", "additionalProperties": false, "required": ["manuscript_version", "run_id"], "properties": {"manuscript_version": {"type": "string"}, "run_id": {"type": ["string", "null"]}, "file_locator": {"type": ["string", "null"]}, "sha256": {"type": ["string", "null"]}}},
+    "symptom": {"type": "string", "minLength": 1},
+    "impact": {"type": "string", "minLength": 1},
+    "evidence": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["kind", "locator"], "properties": {"kind": {"type": "string"}, "locator": {"type": "string"}, "description": {"type": "string"}}}},
+    "candidate_rule_ids": {"type": "array", "items": {"type": "string"}},
+    "candidate_fixture_id": {"type": ["string", "null"]},
+    "containment_action": {"type": ["string", "null"]},
+    "root_cause_status": {"type": "string", "enum": ["unknown", "under_review", "identified", "confirmed"]},
+    "current_disposition": {"type": "string", "enum": ["hold_release", "reproof", "rerun_rci", "route_to_other_family", "monitor", "closed"]},
+    "decision_log_id": {"type": ["string", "null"]},
+    "fix_release": {"type": ["string", "null"]}
+  }
+}

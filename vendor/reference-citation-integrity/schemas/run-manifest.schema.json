@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mwm.local/schemas/rci/run-manifest.schema.json",
+  "title": "MWM RCI Run Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["run_id", "manuscript_file", "manuscript_version", "project_profile", "exception_register", "source_materials", "prior_run_id", "run_mode"],
+  "properties": {
+    "run_id": {"type": "string", "pattern": "^MWM-RCI-[A-Za-z0-9._-]+$"},
+    "manuscript_file": {"type": "string", "minLength": 1},
+    "manuscript_version": {"type": "string", "minLength": 1},
+    "manuscript_sha256": {"type": ["string", "null"], "pattern": "^[A-Fa-f0-9]{64}$"},
+    "project_profile": {"type": "string", "minLength": 1},
+    "exception_register": {"type": "string", "minLength": 1},
+    "source_materials": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_id", "locator", "kind"],
+        "properties": {
+          "source_id": {"type": "string", "minLength": 1},
+          "locator": {"type": "string", "minLength": 1},
+          "kind": {"type": "string", "enum": ["source_copy", "publisher", "registry", "repository", "author", "prior_report", "other"]},
+          "access_status": {"type": "string", "enum": ["available", "inaccessible", "not_checked", "not_applicable"]}
+        }
+      }
+    },
+    "prior_run_id": {"type": ["string", "null"]},
+    "run_mode": {"type": "string", "enum": ["baseline", "incremental", "full", "release", "proof"]}
+  }
+}

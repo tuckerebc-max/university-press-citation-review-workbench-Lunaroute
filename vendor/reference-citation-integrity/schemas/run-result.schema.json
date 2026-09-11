@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mwm.local/schemas/rci/run-result.schema.json",
+  "title": "MWM RCI Run Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["run_id", "specification_id", "specification_version", "manuscript_version", "project_profile", "run_mode", "started_at", "completed_at", "preconditions", "parser_coverage", "summary", "release_status", "rule_package_version", "renderer", "evaluation_set", "findings"],
+  "properties": {
+    "run_id": {"type": "string"},
+    "specification_id": {"const": "MWM-RCI-SPEC"},
+    "specification_version": {"type": "string"},
+    "manuscript_version": {"type": "string"},
+    "project_profile": {"type": "string"},
+    "run_mode": {"type": "string", "enum": ["baseline", "incremental", "full", "release", "proof"]},
+    "started_at": {"type": "string", "format": "date-time"},
+    "completed_at": {"type": "string", "format": "date-time"},
+    "preconditions": {"type": "string", "enum": ["pass", "partial", "fail"]},
+    "parser_coverage": {"type": "string", "enum": ["high", "partial", "low"]},
+    "summary": {"type": "object", "additionalProperties": false, "required": ["citations_found", "references_found", "confirmed_links", "unresolved_links", "findings_total", "blocking_findings", "escalations"], "properties": {"citations_found": {"type": "integer", "minimum": 0}, "references_found": {"type": "integer", "minimum": 0}, "confirmed_links": {"type": "integer", "minimum": 0}, "unresolved_links": {"type": "integer", "minimum": 0}, "findings_total": {"type": "integer", "minimum": 0}, "blocking_findings": {"type": "integer", "minimum": 0}, "escalations": {"type": "integer", "minimum": 0}}},
+    "release_status": {"type": "string", "enum": ["ready", "ready_with_conditions", "not_ready"]},
+    "rule_package_version": {"type": "string"},
+    "renderer": {"type": "object", "additionalProperties": false, "required": ["name", "version", "style_id"], "properties": {"name": {"type": "string"}, "version": {"type": "string"}, "style_id": {"type": ["string", "null"]}}},
+    "evaluation_set": {"type": "string"},
+    "findings": {"type": "array", "items": {"$ref": "finding.schema.json"}},
+    "source_records": {"type": "array", "items": {"$ref": "source-record.schema.json"}},
+    "ledger_entries": {"type": "array", "items": {"$ref": "ledger-entry.schema.json"}},
+    "decision_records": {"type": "array", "items": {"$ref": "decision-record.schema.json"}}
+  }
+}

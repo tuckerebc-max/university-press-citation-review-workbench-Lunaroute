@@ -1,0 +1,11 @@
+{
+  "ledger_entry_id": "L001",
+  "source_record_id": "R001",
+  "citation_ids": ["C001", "C002"],
+  "reference_ids": ["R001"],
+  "relationship_status": "matched",
+  "match_method": "stable_identifier",
+  "candidate_source_record_ids": [],
+  "confidence": 0.99,
+  "evidence_ids": ["E001"]
+}

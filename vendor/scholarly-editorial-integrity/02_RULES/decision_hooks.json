@@ -1,0 +1,17 @@
+{
+  "decision_set_id":"MWM-SEI-DECISION-HOOKS",
+  "version":"0.1.0",
+  "status":"open",
+  "runtime_default":"Preserve evidence and neutral language; route unresolved policy or ownership decisions rather than inferring them.",
+  "hooks":[
+    {"hook_id":"SEI-DH-001","question":"What volume-level disclosure matrix applies?","owner":"MWM editorial authority","blocking_if_unresolved":true,"default_behavior":"Record applicability as unknown and query; do not infer a conflict or ethics failure."},
+    {"hook_id":"SEI-DH-002","question":"What is the MWM material-risk threshold and mandatory hold classes?","owner":"MWM senior editorial authority","blocking_if_unresolved":true,"default_behavior":"Use conservative hold for central/high-risk cases."},
+    {"hook_id":"SEI-DH-003","question":"Who is the editorial integrity lead and what are institutional/publisher referral routes?","owner":"MWM senior editorial authority","blocking_if_unresolved":true,"default_behavior":"Mark owner unassigned and block closure of serious concerns."},
+    {"hook_id":"SEI-DH-004","question":"Is CRediT required, optional, or used only for flagged cases?","owner":"MWM editorial authority","blocking_if_unresolved":false,"default_behavior":"Compare available contributor records without deciding entitlement."},
+    {"hook_id":"SEI-DH-005","question":"Which source-status services and release-time lookup procedure are approved?","owner":"MWM reference/editorial authority","blocking_if_unresolved":true,"default_behavior":"Record access/status source and date; do not certify unknown status."},
+    {"hook_id":"SEI-DH-006","question":"How are preprints, retracted sources, translations, and overlapping publications treated?","owner":"MWM editorial authority","blocking_if_unresolved":true,"default_behavior":"Preserve status and role; route central cases."},
+    {"hook_id":"SEI-DH-007","question":"Which AI tools, confidentiality rules, and disclosure language are approved?","owner":"MWM security/editorial authority","blocking_if_unresolved":true,"default_behavior":"No external processing of protected content; query AI disclosure."},
+    {"hook_id":"SEI-DH-008","question":"What evidence-retention period and access controls apply to integrity cases?","owner":"MWM editorial/security authority","blocking_if_unresolved":true,"default_behavior":"Preserve minimum authorized case record and escalate access uncertainty."},
+    {"hook_id":"SEI-DH-009","question":"What remedy language is approved for correction, expression of concern, withdrawal, and retraction?","owner":"MWM senior editorial authority","blocking_if_unresolved":true,"default_behavior":"Do not propose a public-status remedy beyond a neutral hold/referral."}
+  ]
+}

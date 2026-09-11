@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mwm.local/schemas/rci/citation-record.schema.json",
+  "title": "MWM RCI Normalized Citation Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["citation_id", "raw_text", "location", "context_type", "authors_or_group", "year", "parse_confidence"],
+  "properties": {
+    "citation_id": {"type": "string", "pattern": "^C[0-9]{3,}$"},
+    "raw_text": {"type": "string", "minLength": 1},
+    "location": {"type": "string", "minLength": 1},
+    "context_type": {"type": "string", "enum": ["body", "table", "caption", "note", "appendix", "supplementary", "reference_list"]},
+    "citation_form": {"type": "string", "enum": ["narrative", "parenthetical", "secondary", "personal_communication", "unknown"]},
+    "authors_or_group": {"type": "array", "items": {"type": "string"}},
+    "year": {"type": ["string", "null"]},
+    "locator": {"type": ["string", "null"]},
+    "quotation_detected": {"type": "boolean"},
+    "candidate_reference_ids": {"type": "array", "items": {"type": "string", "pattern": "^R[0-9]{3,}$"}},
+    "parse_confidence": {"type": "number", "minimum": 0, "maximum": 1}
+  }
+}

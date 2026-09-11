@@ -1,0 +1,8 @@
+{
+  "registry_id":"MWM-SEI-PROTECTED-RECORDS",
+  "version":"0.1.0",
+  "protected_records":["direct_quotation","participant_details","author_correspondence","institutional_allegation","reviewer_comments","confidential_manuscript","raw_data","personal_contact_information","legal_material","ethics_material"],
+  "default_treatment":"Classify, minimize, preserve authorized evidence, and restrict processing to approved tools and access paths.",
+  "unapproved_external_tool_action":"BLOCK and immediate security/senior escalation",
+  "retention_hook":"SEI-DH-008"
+}

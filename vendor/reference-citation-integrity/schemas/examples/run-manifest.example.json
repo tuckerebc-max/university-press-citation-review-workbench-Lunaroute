@@ -1,0 +1,11 @@
+{
+  "run_id": "MWM-RCI-chapter-20260813-01",
+  "manuscript_file": "chapter.docx",
+  "manuscript_version": "author-v3",
+  "manuscript_sha256": null,
+  "project_profile": "MWM-APA7-v0.1",
+  "exception_register": "decisions.json",
+  "source_materials": [{"source_id": "S001", "locator": "source-copy.pdf", "kind": "source_copy", "access_status": "available"}],
+  "prior_run_id": null,
+  "run_mode": "full"
+}

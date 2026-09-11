@@ -1,0 +1,17 @@
+{
+  "production_failure_id": "PFAIL-RCI-YYYYMMDD-0001",
+  "capture_status": "new",
+  "discovered_at": "YYYY-MM-DDT00:00:00Z",
+  "stage": "production_handoff",
+  "artifact": {"manuscript_version": "author-vN", "run_id": null, "file_locator": null, "sha256": null},
+  "symptom": "Describe the failure visible in the production workflow.",
+  "impact": "Describe attribution, reproducibility, release, or handoff impact.",
+  "evidence": [{"kind": "run_output", "locator": "path-or-record-locator", "description": "Evidence that permits reproduction."}],
+  "candidate_rule_ids": [],
+  "candidate_fixture_id": null,
+  "containment_action": "Hold affected release or preserve the last known-good run.",
+  "root_cause_status": "unknown",
+  "current_disposition": "hold_release",
+  "decision_log_id": null,
+  "fix_release": null
+}

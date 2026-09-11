@@ -1,0 +1,21 @@
+{
+  "contract_set_id": "MWM-EDITORIAL-CROSS-FAMILY-RCI",
+  "version": "0.1.0",
+  "family": "reference-citation-integrity",
+  "inbound": [
+    {"from": "Editorial QA & Orchestration", "artifact": "run_manifest", "schema": "run-manifest.schema.json", "allowed_fields": ["run_id", "manuscript_file", "manuscript_version", "project_profile", "exception_register", "source_materials", "prior_run_id", "run_mode"], "rci_may_reinterpret": false},
+    {"from": "Style-Guide Implementation", "artifact": "active_project_profile", "schema": "decision-record.schema.json", "allowed_fields": ["rule_package_version", "approved_exceptions", "decision_log_ids"], "rci_may_reinterpret": false}
+  ],
+  "outbound": [
+    {"to": "Scholarly/Editorial Integrity", "artifact": "source_identity_evidence", "schema": "source-record.schema.json", "consumer_may_use": ["source_type", "identity", "identifiers", "metadata_evidence", "relations", "verification_status"], "consumer_may_not_infer": ["claim_support", "claim_truth", "source_quality"]},
+    {"to": "Chapter Completeness & Production Readiness", "artifact": "rci_status_summary", "schema": "run-result.schema.json", "consumer_may_use": ["release_status", "summary", "blocking_findings", "decision_log_ids"], "consumer_may_not_reinterpret": ["claim_support", "permissions", "copyediting_status"]},
+    {"to": "Proof & Post-Typesetting Review", "artifact": "citation_reference_baseline", "schema": "run-result.schema.json", "consumer_may_use": ["source_records", "ledger_entries", "renderer", "findings"], "consumer_may_not_reinterpret": ["pre_typeset_identity_without_fixity_check"]},
+    {"to": "Editorial QA & Orchestration", "artifact": "validated_run_result", "schema": "run-result.schema.json", "consumer_may_use": ["release_status", "findings", "decision_records", "evaluation_set"], "consumer_may_not_reinterpret": ["source_identity_without_evidence", "unresolved_policy_as_approved_rule"]}
+  ],
+  "boundary_invariants": [
+    "RCI establishes source identity and citation/reference relationships; it does not judge claim support.",
+    "RCI may propose deterministic formatting mechanics only when the active decision hook enables them.",
+    "No downstream family may silently substitute, delete, or merge an RCI source record.",
+    "A change to an RCI rule, schema, or decision hook requires a regression fixture and changelog entry."
+  ]
+}

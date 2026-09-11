@@ -1,0 +1,7 @@
+interface:
+  display_name: "Reference & Citation Integrity"
+  short_description: "Evidence-backed citation and reference QA"
+  default_prompt: "Use $reference-citation-integrity to audit this chapter's citations and references, preserve evidence, and return a validated release status."
+
+policy:
+  allow_implicit_invocation: true

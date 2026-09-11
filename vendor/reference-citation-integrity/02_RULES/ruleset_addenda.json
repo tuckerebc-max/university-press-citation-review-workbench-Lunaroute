@@ -1,0 +1,18 @@
+{
+  "rule_set_id": "MWM-RCI-RULES-ADDENDA",
+  "version": "0.1.0",
+  "parent_rule_set": "02_RULES/ruleset.json",
+  "rules": [
+    {
+      "id": "RCI-ID-004",
+      "family": "identifier",
+      "statement": "Identifier syntax, normalization, resolution, and identity attachment are recorded as separate checks.",
+      "applies_to": ["RCI-05"],
+      "evidence_required": ["raw_identifier", "syntax_status", "normalized_identifier", "access_status"],
+      "default_action": "FLAG",
+      "auto_fixable": false,
+      "fixture_classes": ["malformed_identifier", "identifier_status", "negative_control"]
+    }
+  ],
+  "note": "This backward-compatible addendum preserves the governing v0.1.0 ruleset while adding an explicit identifier-status rule required by the fixture corpus. Consolidate into the next minor ruleset release after editorial approval."
+}
