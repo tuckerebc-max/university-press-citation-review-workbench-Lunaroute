@@ -1,8 +1,8 @@
 # University Press Workbench verification record
 
-Verification date: September 9, 2026
+Verification date: September 10, 2026
 
-Status: **Ready with conditions for a private pilot.** The application, both pinned skills, a live LunaRoute run, the browser interface, and one generated Word packet were tested. The review found and corrected defects; this record does not claim the system is secure or ready for unattended publication work.
+Status: **Ready with conditions for supervised local production use.** The application, both pinned skills, a live LunaRoute run, the browser interface, and one generated Word packet were tested. The review found and corrected defects; this record does not claim the system is secure or ready for unattended publication work.
 
 ## What passed
 
@@ -12,6 +12,7 @@ Status: **Ready with conditions for a private pilot.** The application, both pin
 - The author copy contained 14 native Word comments, a visible review appendix, no external DOCX relationships, and no accepted edits. Its final three-page layout was inspected page by page in Microsoft Word rendering after the bundled LibreOffice renderer reported that LibreOffice was absent on this host.
 - Browser smoke tests returned HTTP 200, served a restrictive CSP, injected a random per-process request token, loaded both pinned skills, scanned one chapter, and rejected a forged cross-origin state change with HTTP 403. No browser warnings or errors were logged.
 - The repository secret scan found no embedded LunaRoute, OpenAI, GitHub, Google, or private-key values. The security pattern scan returned no candidates; that result is triage evidence, not proof of security.
+- All nine application tests passed on Windows after the release gate corrected package-checkout line endings, short-path source containment, Windows process liveness checks, and SQLite connection closure.
 
 ## Automated checks
 

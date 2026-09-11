@@ -4,6 +4,7 @@ import json
 import os
 import sqlite3
 import threading
+from contextlib import closing
 from pathlib import Path
 from typing import Any
 
@@ -27,6 +28,51 @@ CHAPTER_UPDATE_SQL = {
 }
 
 
+def _process_is_alive(pid: int) -> bool:
+    """Check liveness without using os.kill(pid, 0) on Windows.
+
+    Windows implements os.kill with process-control semantics rather than the
+    POSIX existence probe, so signal 0 can interrupt the process being checked.
+    """
+    if pid <= 0:
+        return False
+    if pid == os.getpid():
+        return True
+    if os.name == "nt":
+        import ctypes
+        from ctypes import wintypes
+
+        process_query_limited_information = 0x1000
+        still_active = 259
+        error_invalid_parameter = 87
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        kernel32.OpenProcess.argtypes = [wintypes.DWORD, wintypes.BOOL, wintypes.DWORD]
+        kernel32.OpenProcess.restype = wintypes.HANDLE
+        kernel32.GetExitCodeProcess.argtypes = [wintypes.HANDLE, ctypes.POINTER(wintypes.DWORD)]
+        kernel32.GetExitCodeProcess.restype = wintypes.BOOL
+        kernel32.CloseHandle.argtypes = [wintypes.HANDLE]
+        kernel32.CloseHandle.restype = wintypes.BOOL
+        handle = kernel32.OpenProcess(process_query_limited_information, False, pid)
+        if not handle:
+            # Access denied means a process exists but cannot be queried. Unknown
+            # errors are treated as alive so recovery never steals active work.
+            return ctypes.get_last_error() != error_invalid_parameter
+        try:
+            exit_code = wintypes.DWORD()
+            if not kernel32.GetExitCodeProcess(handle, ctypes.byref(exit_code)):
+                return True
+            return exit_code.value == still_active
+        finally:
+            kernel32.CloseHandle(handle)
+    try:
+        os.kill(pid, 0)
+        return True
+    except PermissionError:
+        return True
+    except (ProcessLookupError, OSError):
+        return False
+
+
 class StateStore:
     def __init__(self, path: Path) -> None:
         self.path = path
@@ -42,7 +88,7 @@ class StateStore:
         return connection
 
     def _initialize(self) -> None:
-        with self._connect() as db:
+        with closing(self._connect()) as db, db:
             db.executescript(
                 """
                 PRAGMA journal_mode=WAL;
@@ -110,7 +156,7 @@ class StateStore:
             "model", "crossref_enabled", "concurrency", "run_mode", "manifest_hash", "plan_hash", "error", "budget_json",
             "worker_pid", "heartbeat_at",
         ]
-        with self._write_lock, self._connect() as db:
+        with self._write_lock, closing(self._connect()) as db, db:
             db.execute(
                 """INSERT INTO runs(
                     run_id,created_at,updated_at,status,input_root,output_root,project_label,case_owner,
@@ -128,7 +174,7 @@ class StateStore:
         allowed = {"status", "updated_at", "error", "budget_json", "worker_pid", "heartbeat_at"}
         values = {key: value for key, value in values.items() if key in allowed}
         values.setdefault("updated_at", utc_now())
-        with self._write_lock, self._connect() as db:
+        with self._write_lock, closing(self._connect()) as db, db:
             for key, value in values.items():
                 db.execute(RUN_UPDATE_SQL[key], (value, run_id))
 
@@ -137,16 +183,16 @@ class StateStore:
         values = {key: value for key, value in values.items() if key in allowed}
         if not values:
             return
-        with self._write_lock, self._connect() as db:
+        with self._write_lock, closing(self._connect()) as db, db:
             for key, value in values.items():
                 db.execute(CHAPTER_UPDATE_SQL[key], (value, run_id, chapter_id))
 
     def append_event(self, run_id: str, event_type: str, payload: dict[str, Any]) -> None:
-        with self._write_lock, self._connect() as db:
+        with self._write_lock, closing(self._connect()) as db, db:
             db.execute("INSERT INTO events(run_id,created_at,event_type,payload_json) VALUES(?,?,?,?)", (run_id, utc_now(), event_type, json.dumps(payload, ensure_ascii=False, sort_keys=True)))
 
     def get_run(self, run_id: str) -> dict[str, Any] | None:
-        with self._connect() as db:
+        with closing(self._connect()) as db:
             row = db.execute("SELECT * FROM runs WHERE run_id=?", (run_id,)).fetchone()
         if row is None:
             return None
@@ -157,7 +203,7 @@ class StateStore:
         return result
 
     def get_chapters(self, run_id: str) -> list[dict[str, Any]]:
-        with self._connect() as db:
+        with closing(self._connect()) as db:
             rows = db.execute("SELECT * FROM chapters WHERE run_id=? ORDER BY chapter_id", (run_id,)).fetchall()
         output = []
         for row in rows:
@@ -167,31 +213,22 @@ class StateStore:
         return output
 
     def list_runs(self, limit: int = 20) -> list[dict[str, Any]]:
-        with self._connect() as db:
+        with closing(self._connect()) as db:
             rows = db.execute("SELECT run_id,created_at,updated_at,status,project_label,output_root,error FROM runs ORDER BY created_at DESC LIMIT ?", (limit,)).fetchall()
         return [dict(row) for row in rows]
 
     def reset_incomplete(self, run_id: str) -> None:
-        with self._write_lock, self._connect() as db:
+        with self._write_lock, closing(self._connect()) as db, db:
             db.execute("UPDATE chapters SET status='pending', stage='pending', error=NULL WHERE run_id=? AND status!='packet_built'", (run_id,))
 
     def recover_orphaned_runs(self) -> int:
         """Mark active records interrupted only when their owning process is gone."""
         recovered = 0
-        with self._write_lock, self._connect() as db:
+        with self._write_lock, closing(self._connect()) as db, db:
             rows = db.execute("SELECT run_id,worker_pid FROM runs WHERE status IN ('queued','running','cancelling')").fetchall()
             for row in rows:
                 pid = int(row["worker_pid"] or 0)
-                alive = False
-                if pid > 0:
-                    try:
-                        os.kill(pid, 0)
-                        alive = True
-                    except PermissionError:
-                        alive = True
-                    except (ProcessLookupError, OSError):
-                        alive = False
-                if alive:
+                if _process_is_alive(pid):
                     continue
                 now = utc_now()
                 db.execute("UPDATE runs SET status='interrupted',updated_at=?,worker_pid=NULL,heartbeat_at=? WHERE run_id=?", (now, now, row["run_id"]))

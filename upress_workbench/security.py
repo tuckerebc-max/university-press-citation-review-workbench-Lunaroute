@@ -119,6 +119,7 @@ def validate_output_parent(value: str | Path, input_root: Path) -> Path:
 
 
 def scan_sources(root: Path) -> list[SourceFile]:
+    root = validate_input_root(root)
     sources: list[SourceFile] = []
     total = 0
     pending = [root]
@@ -126,30 +127,34 @@ def scan_sources(root: Path) -> list[SourceFile]:
         directory = pending.pop()
         if _is_reparse_point(directory):
             continue
-        for entry in os.scandir(directory):
-            path = Path(entry.path)
-            if entry.is_symlink():
-                continue
-            if entry.is_dir(follow_symlinks=False):
-                if not _is_reparse_point(path):
-                    pending.append(path)
-                continue
-            if not entry.is_file(follow_symlinks=False):
-                continue
-            if path.name.startswith("~$") or path.suffix.lower() not in config.SUPPORTED_EXTENSIONS:
-                continue
-            size = entry.stat(follow_symlinks=False).st_size
-            if size <= 0:
-                continue
-            if size > config.MAX_FILE_BYTES:
-                raise SafetyError(f"{path.name} exceeds the {config.MAX_FILE_BYTES // 1024 // 1024} MB limit.")
-            total += size
-            if total > config.MAX_TOTAL_BYTES:
-                raise SafetyError("The selected chapter set exceeds the total size limit.")
-            relative = path.resolve(strict=True).relative_to(root).as_posix()
-            sources.append(SourceFile(path, relative, size, sha256_file(path)))
-            if len(sources) > config.MAX_CHAPTERS:
-                raise SafetyError(f"A run may contain at most {config.MAX_CHAPTERS} chapters.")
+        with os.scandir(directory) as entries:
+            for entry in entries:
+                path = Path(entry.path)
+                if entry.is_symlink():
+                    continue
+                if entry.is_dir(follow_symlinks=False):
+                    if not _is_reparse_point(path):
+                        pending.append(path)
+                    continue
+                if not entry.is_file(follow_symlinks=False):
+                    continue
+                if path.name.startswith("~$") or path.suffix.lower() not in config.SUPPORTED_EXTENSIONS:
+                    continue
+                size = entry.stat(follow_symlinks=False).st_size
+                if size <= 0:
+                    continue
+                if size > config.MAX_FILE_BYTES:
+                    raise SafetyError(f"{path.name} exceeds the {config.MAX_FILE_BYTES // 1024 // 1024} MB limit.")
+                total += size
+                if total > config.MAX_TOTAL_BYTES:
+                    raise SafetyError("The selected chapter set exceeds the total size limit.")
+                # Keep the lexical path produced by the already-validated, non-reparse
+                # traversal. Resolving only the child expands 8.3 names on Windows and
+                # can make a safe child appear to be outside the same root.
+                relative = path.relative_to(root).as_posix()
+                sources.append(SourceFile(path, relative, size, sha256_file(path)))
+                if len(sources) > config.MAX_CHAPTERS:
+                    raise SafetyError(f"A run may contain at most {config.MAX_CHAPTERS} chapters.")
     return sorted(sources, key=lambda item: item.relative_path.casefold())
 
 
