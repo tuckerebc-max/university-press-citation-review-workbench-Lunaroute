@@ -8,6 +8,8 @@ import time
 from pathlib import Path
 from typing import Any
 
+_CANONICAL_TEXT_SUFFIXES = {".json", ".md", ".py", ".txt", ".yaml", ".yml"}
+
 
 def utc_now() -> str:
     return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
@@ -66,6 +68,7 @@ def append_jsonl(path: Path, value: Any) -> None:
 
 
 def tree_sha256(root: Path) -> str:
+    """Hash a package tree with checkout-independent text line endings."""
     digest = hashlib.sha256()
     files = []
     for path in root.rglob("*"):
@@ -82,6 +85,9 @@ def tree_sha256(root: Path) -> str:
         relative = path.relative_to(root).as_posix()
         digest.update(relative.encode("utf-8"))
         digest.update(b"\0")
-        digest.update(hashlib.sha256(path.read_bytes()).digest())
+        payload = path.read_bytes()
+        if path.suffix.casefold() in _CANONICAL_TEXT_SUFFIXES:
+            payload = payload.replace(b"\r\n", b"\n")
+        digest.update(hashlib.sha256(payload).digest())
         digest.update(b"\0")
     return digest.hexdigest()
